@@ -60,6 +60,12 @@ Gardez la trace de tous les packages dans un fichier requirements.txt. :
 pip freeze > requirements.txt
 ```
 
+### ⚙️ Générez les migrations initiales
+
+```bash
+python manage.py makemigrations
+```
+
 ### 🛠️ Initialisation de la base de données
 
 Appliquez les migrations pour créer les tables nécessaires :
@@ -67,8 +73,6 @@ Appliquez les migrations pour créer les tables nécessaires :
 ```bash
 python manage.py migrate
 ```
-
----
 
 ### 👤 Création d’un superutilisateur
 
@@ -80,8 +84,6 @@ python manage.py createsuperuser
 
 Suivez les instructions pour définir un nom d’utilisateur, une adresse email et un mot de passe.
 
----
-
 ### ▶️ Lancer le serveur de développement
 
 ```bash
@@ -91,14 +93,10 @@ python manage.py runserver
 L’application sera alors disponible à l’adresse suivante :  
 👉 http://127.0.0.1:8000/
 
----
-
 ### 🔑 Accès à l’administration Django
 
 👉 http://127.0.0.1:8000/admin/  
 Connectez-vous avec le superutilisateur que vous avez créé précédemment.
-
----
 
 ### 🧪 Tests (optionnel)
 
