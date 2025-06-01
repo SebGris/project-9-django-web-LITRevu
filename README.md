@@ -15,7 +15,6 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 - [pip](https://pip.pypa.io/en/stable/installation/)
 - [Git](https://git-scm.com/)
 - Un éditeur de code (ex : VS Code)
-- Un environnement virtuel Python (recommandé)
 
 ---
 
