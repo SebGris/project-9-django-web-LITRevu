@@ -31,13 +31,6 @@ cd mon-projet-django
 
 ### 2. Créer et activer un environnement virtuel
 
-**Sous Linux / macOS** :
-
-```bash
-python3 -m venv env
-source env/bin/activate
-```
-
 **Sous Windows** :
 
 ```bash
