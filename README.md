@@ -71,7 +71,13 @@ python -m venv env
 #### 3. Activer l'environnement virtuel.
 
 ```bash
-source env/bin/activate
+.venv\Scripts\activate.bat
+```
+
+#### 4. Installez Django avec pip
+
+```bash
+pip install django
 ```
 
 ### 🛠️ Initialisation de la base de données
