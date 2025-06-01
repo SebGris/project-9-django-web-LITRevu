@@ -86,7 +86,7 @@ Connectez-vous avec le superutilisateur que vous avez créé précédemment.
 
 ---
 
-## 🧪 Tests (optionnel)
+### 🧪 Tests (optionnel)
 
 Pour exécuter les tests unitaires :
 
