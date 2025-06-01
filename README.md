@@ -25,8 +25,8 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/SebGris/project-8-django-web-LITRevu.git
-cd projet-django-LITRevu
+git clone https://github.com/SebGris/project-9-django-web-LITRevu.git
+cd project-9-django-web-LITRevu
 ```
 
 ### 2. Créer et activer un environnement virtuel
@@ -44,7 +44,11 @@ pip install -r requirements.txt
 
 ---
 
-## ⚙️ Quelques commandes Django
+## ⚙️ Quelques commandes et procédures Django
+
+### 📥 Installez Django avec pip
+
+#### 1 : Commencez par ouvrir un terminal.
 
 ### 🛠️ Initialisation de la base de données
 
