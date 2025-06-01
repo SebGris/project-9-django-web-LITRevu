@@ -1,9 +1,9 @@
 
-# Mon Projet Django
+# Mon Projet Django pour LITRevu
 
 ## 🚀 Introduction
 
-Bienvenue dans **Mon Projet Django** !  
+Bienvenue dans **Mon Projet Django pour LITRevu** !  
 Ce guide vous expliquera comment configurer et exécuter ce projet Django en local sur votre machine.
 
 ---
@@ -26,12 +26,10 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 
 ```bash
 git clone https://github.com/SebGris/project-8-django-web-LITRevu.git
-cd mon-projet-django
+cd projet-django-LITRevu
 ```
 
 ### 2. Créer et activer un environnement virtuel
-
-**Sous Windows** :
 
 ```bash
 python -m venv env
@@ -46,19 +44,9 @@ pip install -r requirements.txt
 
 ---
 
-## ⚙️ Configuration de l’environnement
+## ⚙️ Quelques commandes Django
 
-Si le projet utilise des variables d’environnement (ex : clés secrètes, configuration base de données), créez un fichier `.env` :
-
-```bash
-cp .env.example .env
-```
-
-Ensuite, remplissez les champs nécessaires dans `.env`.
-
----
-
-## 🛠️ Initialisation de la base de données
+### 🛠️ Initialisation de la base de données
 
 Appliquez les migrations pour créer les tables nécessaires :
 
@@ -68,7 +56,7 @@ python manage.py migrate
 
 ---
 
-## 👤 Création d’un superutilisateur
+### 👤 Création d’un superutilisateur
 
 Pour accéder à l’interface d’administration Django :
 
@@ -80,7 +68,7 @@ Suivez les instructions pour définir un nom d’utilisateur, une adresse email 
 
 ---
 
-## ▶️ Lancer le serveur de développement
+### ▶️ Lancer le serveur de développement
 
 ```bash
 python manage.py runserver
@@ -91,7 +79,7 @@ L’application sera alors disponible à l’adresse suivante :
 
 ---
 
-## 🔑 Accès à l’administration Django
+### 🔑 Accès à l’administration Django
 
 👉 http://127.0.0.1:8000/admin/  
 Connectez-vous avec le superutilisateur que vous avez créé précédemment.
