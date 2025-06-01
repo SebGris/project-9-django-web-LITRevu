@@ -48,7 +48,31 @@ pip install -r requirements.txt
 
 ### 📥 Installez Django avec pip
 
-#### 1 : Commencez par ouvrir un terminal.
+#### 1. Ouvrir un terminal.
+
+Créer un répertoire pour l'application web Django.
+
+```bash
+mkdir project-9-django-web-LITRevu
+cd project-9-django-web-LITRevu
+```
+Optionnel : si vous suivez ce projet dans Git, c'est là que nous initialiserons notre repository.
+
+```bash
+git init
+```
+
+#### 2. Créer un environnement virtuel.
+
+```bash
+python -m venv env
+```
+
+#### 3. Activer l'environnement virtuel.
+
+```bash
+source env/bin/activate
+```
 
 ### 🛠️ Initialisation de la base de données
 
