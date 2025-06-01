@@ -53,6 +53,14 @@ Assurez-vous que votre environnement virtuel est activé, puis installez Django 
 pip install django
 ```
 
+### ⚙️ Créer le fichier requirements.txt
+
+Gardez la trace de tous les packages dans un fichier requirements.txt. :
+
+```bash
+pip freeze > requirements.txt
+```
+
 ### 🛠️ Initialisation de la base de données
 
 Appliquez les migrations pour créer les tables nécessaires :
