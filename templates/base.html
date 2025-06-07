@@ -1,18 +1,48 @@
+{% load static %}
 <html>
     <head>
         <title>LITRevu</title>
+        <link rel="stylesheet" href="{% static 'app.css' %}">
+        <style>
+            .navbar {
+                width: 100%;
+                background: #222;
+                color: #fff;
+                padding: 10px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-sizing: border-box;
+            }
+            .navbar h1 {
+                margin: 0;
+                font-size: 1.5em;
+            }
+            .navbar a {
+                color: #fff;
+                text-decoration: none;
+                margin-left: 20px;
+            }
+        </style>
     </head>
     <body>
-        <h1>LITRevu</h1>
-        {% block content %}{% endblock content %}
-        {% if user.is_authenticated %}
-            <p>
-                Vous êtes connecté en tant que {{ request.user }}.
-                <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" style="background:none;border:none;color:#007bff;text-decoration:underline;cursor:pointer;padding:0;">Se déconnecter</button>
-                </form>
-            </p>
-        {% endif %}
+        <div class="navbar">
+            <h1>LITRevu</h1>
+            {% if user.is_authenticated %}
+                <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
+            {% endif %}
+        </div>
+        <div class="main">
+            {% block content %}{% endblock content %}
+            {% if user.is_authenticated %}
+                <p>
+                    Vous êtes connecté en tant que {{ request.user }}.
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background:none;border:none;color:#007bff;text-decoration:underline;cursor:pointer;padding:0;">Se déconnecter</button>
+                    </form>
+                </p>
+            {% endif %}
+        </div>
     </body>
 </html>
