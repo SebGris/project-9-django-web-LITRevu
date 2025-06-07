@@ -17,6 +17,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('home/', review.views.home, name='home'),
+    path('posts/', review.views.posts, name='posts'),
 ]
 
 if settings.DEBUG:
