@@ -11,9 +11,7 @@ def posts(request):
         form = forms.TicketForm(request.POST, request.FILES)
         if form.is_valid():
             ticket = form.save(commit=False)
-            # set the uploader to the user before saving the model
-            ticket.uploader = request.user
-            # now we can save
+            ticket.user = request.user
             ticket.save()
             return redirect('home')
     return render(request, 'review/posts.html', context={'form': form})
