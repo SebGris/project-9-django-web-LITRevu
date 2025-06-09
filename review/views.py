@@ -22,6 +22,19 @@ def create_ticket(request):
 
 
 @login_required
+def create_review(request):
+    form = forms.TicketForm()
+    if request.method == 'POST':
+        form = forms.TicketForm(request.POST, request.FILES)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            return redirect('home')
+    return render(request, 'review/create_review.html', context={'form': form})
+
+
+@login_required
 def edit_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     edit_form = forms.TicketForm(instance=ticket)
@@ -57,6 +70,18 @@ def delete_ticket(request, ticket_id):
 def home(request):
     posts = models.Ticket.objects.all()
     return render(request, 'review/home.html', context={'posts': posts}, )
+
+
+@login_required
+def flux(request):
+    flux = models.Ticket.objects.all()
+    return render(request, 'review/flux.html', context={'flux': flux}, )
+
+
+@login_required
+def posts(request):
+    posts = models.Ticket.objects.all()
+    return render(request, 'review/posts.html', context={'posts': posts}, )
 
 
 @login_required

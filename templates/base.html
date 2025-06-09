@@ -29,6 +29,8 @@
         <div class="navbar">
             <h1>LITRevu</h1>
             {% if user.is_authenticated %}
+                <p><a href="{% url 'ticket_create' %}">Créer Ticket</a></p>
+                <p><a href="{% url 'flux' %}">Flux</a></p>
                 <p><a href="{% url 'posts' %}">Posts</a></p>
                 <p><a href="{% url 'follow_users' %}">Abonnements</a></p>
                 <form action="{% url 'logout' %}" method="post" style="display:inline;">
