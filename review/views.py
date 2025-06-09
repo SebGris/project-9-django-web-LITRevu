@@ -9,7 +9,7 @@ from . import forms, models
 
 
 @login_required
-def posts(request):
+def create_ticket(request):
     form = forms.TicketForm()
     if request.method == 'POST':
         form = forms.TicketForm(request.POST, request.FILES)
@@ -18,7 +18,7 @@ def posts(request):
             ticket.user = request.user
             ticket.save()
             return redirect('home')
-    return render(request, 'review/posts.html', context={'form': form})
+    return render(request, 'review/create_ticket.html', context={'form': form})
 
 
 @login_required
