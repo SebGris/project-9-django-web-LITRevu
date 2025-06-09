@@ -29,6 +29,7 @@
         <div class="navbar">
             <h1>LITRevu</h1>
             {% if user.is_authenticated %}
+                <p><a href="{% url 'home' %}">Accueil</a></p>
                 <p><a href="{% url 'ticket_create' %}">Créer Ticket</a></p>
                 <p><a href="{% url 'flux' %}">Flux</a></p>
                 <p><a href="{% url 'posts' %}">Posts</a></p>
@@ -37,6 +38,7 @@
                     {% csrf_token %}
                     <button type="submit" style="background:none;border:none;color:#fff;text-decoration:underline;cursor:pointer;padding:0;">Se déconnecter</button>
                 </form>
+                <p>Bienvenue, {{ user.username }} !</p>
             {% endif %}
         </div>
         <div class="main">

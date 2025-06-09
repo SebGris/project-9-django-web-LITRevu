@@ -5,7 +5,9 @@
         {% for post in posts %}
             <div class="post">
                 <p>Ticket - {{ post.user }}</p>
-                <img src="{{ post.image.url }}">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}">
+                {% endif %}
                 <p>{{ post.title }}</p>
                 <p>
                     <a href="{% url 'edit_ticket' post.id %}">Modifier</a>

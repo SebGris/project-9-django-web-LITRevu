@@ -74,7 +74,7 @@ def home(request):
 
 @login_required
 def flux(request):
-    flux = models.Ticket.objects.all()
+    flux = models.Ticket.objects.filter(user=request.user)
     return render(request, 'review/flux.html', context={'flux': flux}, )
 
 
