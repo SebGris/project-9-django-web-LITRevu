@@ -26,6 +26,10 @@ urlpatterns = [
          name='edit_ticket'),
     path('ticket/<int:ticket_id>/delete', review.views.delete_ticket,
          name='delete_ticket'),
+    path('review/<int:review_id>/edit', review.views.edit_review,
+         name='edit_review'),
+    path('review/<int:review_id>/delete', review.views.delete_review,
+         name='delete_review'),
     path('follow-users/', review.views.follow_users, name='follow_users'),
 ]
 

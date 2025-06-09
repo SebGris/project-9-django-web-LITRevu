@@ -62,6 +62,22 @@ def edit_ticket(request, ticket_id):
 
 
 @login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    edit_form = forms.ReviewForm(instance=review)
+    if request.method == 'POST':
+        if 'edit_review' in request.POST:
+            edit_form = forms.ReviewForm(request.POST, instance=review)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('home')
+    context = {
+        'edit_form': edit_form,
+    }
+    return render(request, 'review/edit_review.html', context=context)
+
+
+@login_required
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     delete_form = forms.DeleteTicketForm()
@@ -75,6 +91,22 @@ def delete_ticket(request, ticket_id):
         'delete_form': delete_form,
     }
     return render(request, 'review/delete_ticket.html', context=context)
+
+
+@login_required
+def delete_review(request, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    delete_form = forms.DeleteReviewForm()
+    if request.method == 'POST':
+        if 'delete_review' in request.POST:
+            delete_form = forms.DeleteReviewForm(request.POST)
+            if delete_form.is_valid():
+                review.delete()
+                return redirect('home')
+    context = {
+        'delete_form': delete_form,
+    }
+    return render(request, 'review/delete_review.html', context=context)
 
 
 @login_required

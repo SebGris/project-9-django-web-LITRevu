@@ -31,6 +31,10 @@ class DeleteTicketForm(forms.Form):
     delete_ticket = forms.BooleanField(widget=forms.HiddenInput(), initial=True)
 
 
+class DeleteReviewForm(forms.Form):
+    delete_review = forms.BooleanField(widget=forms.HiddenInput(), initial=True)
+
+
 class FollowUsersForm(forms.ModelForm):
     class Meta:
         model = User

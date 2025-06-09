@@ -10,6 +10,11 @@
                 <p>{{ review.body }}</p>
                 <p>{{ review.user }}</p>
                 <p>{{ review.time_created}}</p>
+                <p>
+                    <a href="{% url 'edit_review' review.id %}">Modifier</a>
+                    |
+                    <a href="{% url 'delete_review' review.id %}">Supprimer</a>
+                </p>
             </div>
         {% endfor %}
     </div>
