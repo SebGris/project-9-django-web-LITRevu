@@ -8,6 +8,9 @@
                 <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
                 <img src="{{ post.image.url }}">
                 <p>{{ post.title }}</p>
+                <p>
+                    <a href="{% url 'edit_ticket' post.id %}">Modifier</a>
+                </p>
             </div>
         {% endfor %}
     </div>
