@@ -18,6 +18,7 @@ urlpatterns = [
     path('signup/', authentication.views.signup_page, name='signup'),
     path('home/', review.views.home, name='home'),
     path('posts/', review.views.posts, name='posts'),
+    path('follow-users/', review.views.follow_users, name='follow_users'),
 ]
 
 if settings.DEBUG:

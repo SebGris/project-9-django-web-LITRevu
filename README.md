@@ -64,9 +64,12 @@ pip freeze > requirements.txt
 
 ### 🛠️ Générez les migrations initiales
 
+Pour créer une migration personnalisée (vide au départ) il faut ajouter 'nom_de_l_application --empty' à la fin de makemigrations.
+
 ```bash
 python manage.py makemigrations
 ```
+
 
 ### 🛠️ Initialisation de la base de données
 
