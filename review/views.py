@@ -84,6 +84,12 @@ def home(request):
 
 
 @login_required
+def reviews(request):
+    reviews = models.Review.objects.all()
+    return render(request, 'review/reviews.html', context={'reviews': reviews}, )
+
+
+@login_required
 def flux(request):
     flux = models.Ticket.objects.filter(user=request.user)
     return render(request, 'review/flux.html', context={'flux': flux}, )
