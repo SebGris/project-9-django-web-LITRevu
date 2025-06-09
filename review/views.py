@@ -38,6 +38,22 @@ def edit_ticket(request, ticket_id):
 
 
 @login_required
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    delete_form = forms.DeleteTicketForm()
+    if request.method == 'POST':
+        if 'delete_ticket' in request.POST:
+            delete_form = forms.DeleteTicketForm(request.POST)
+            if delete_form.is_valid():
+                ticket.delete()
+                return redirect('home')
+    context = {
+        'delete_form': delete_form,
+    }
+    return render(request, 'review/delete_ticket.html', context=context)
+
+
+@login_required
 def home(request):
     posts = models.Ticket.objects.all()
     return render(request, 'review/home.html', context={'posts': posts}, )

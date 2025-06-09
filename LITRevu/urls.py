@@ -20,6 +20,8 @@ urlpatterns = [
     path('posts/', review.views.create_ticket, name='posts'),
     path('ticket/<int:ticket_id>/edit', review.views.edit_ticket,
          name='edit_ticket'),
+    path('ticket/<int:ticket_id>/delete', review.views.delete_ticket,
+         name='delete_ticket'),
     path('follow-users/', review.views.follow_users, name='follow_users'),
 ]
 

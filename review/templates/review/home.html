@@ -10,6 +10,8 @@
                 <p>{{ post.title }}</p>
                 <p>
                     <a href="{% url 'edit_ticket' post.id %}">Modifier</a>
+                    |
+                    <a href="{% url 'delete_ticket' post.id %}">Supprimer</a>
                 </p>
             </div>
         {% endfor %}
