@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
+    <style>
+        .post {
+            border: 1px solid #000;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            background: #fff;
+        }
+        .post img {
+            max-width: 150px;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            display: block;
+            margin-bottom: 8px;
+        }
+    </style>
     <div class="grid-container">
         {% for post in posts %}
             <div class="post">

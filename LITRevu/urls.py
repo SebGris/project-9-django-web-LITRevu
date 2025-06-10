@@ -22,6 +22,7 @@ urlpatterns = [
     path('flux/', review.views.flux, name='flux'),
     path('posts/', review.views.posts, name='posts'),
     path('review/create', review.views.create_review, name='review_create'),
+    path('review/create/<int:ticket_id>/', review.views.create_review, name='review_create'),
     path('ticket/<int:ticket_id>/edit', review.views.edit_ticket,
          name='edit_ticket'),
     path('ticket/<int:ticket_id>/delete', review.views.delete_ticket,
