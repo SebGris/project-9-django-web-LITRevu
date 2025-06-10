@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 20px;">
-        <a href="">
+        <a href="{% url 'ticket_create' %}">
             <button type="button">Demander une critique</button>
         </a>
         <a href="{% url 'review_create' %}">
