@@ -22,27 +22,50 @@ def create_ticket(request):
 
 
 @login_required
-def create_review(request):
+def create_review(request, ticket_id=None):
     from .forms import TicketForm, ReviewForm
-    if request.method == 'POST':
-        ticket_form = TicketForm(request.POST, request.FILES)
-        review_form = ReviewForm(request.POST)
-        if ticket_form.is_valid() and review_form.is_valid():
-            ticket = ticket_form.save(commit=False)
-            ticket.user = request.user
-            ticket.save()
-            review = review_form.save(commit=False)
-            review.user = request.user
-            review.ticket = ticket
-            review.save()
-            return redirect('home')
+    if ticket_id:
+        ticket = get_object_or_404(models.Ticket, id=ticket_id)
+        if request.method == 'POST':
+            ticket_form = TicketForm(request.POST, request.FILES, instance=ticket)
+            review_form = ReviewForm(request.POST)
+            if ticket_form.is_valid() and review_form.is_valid():
+                ticket = ticket_form.save(commit=False)
+                ticket.user = request.user
+                ticket.save()
+                review = review_form.save(commit=False)
+                review.user = request.user
+                review.ticket = ticket
+                review.save()
+                return redirect('home')
+        else:
+            ticket_form = TicketForm(instance=ticket)
+            review_form = ReviewForm()
+        return render(request, 'review/create_review.html', {
+            'ticket_form': ticket_form,
+            'review_form': review_form,
+            'ticket': ticket,
+        })
     else:
-        ticket_form = TicketForm()
-        review_form = ReviewForm()
-    return render(request, 'review/create_review.html', {
-        'ticket_form': ticket_form,
-        'review_form': review_form,
-    })
+        if request.method == 'POST':
+            ticket_form = TicketForm(request.POST, request.FILES)
+            review_form = ReviewForm(request.POST)
+            if ticket_form.is_valid() and review_form.is_valid():
+                ticket = ticket_form.save(commit=False)
+                ticket.user = request.user
+                ticket.save()
+                review = review_form.save(commit=False)
+                review.user = request.user
+                review.ticket = ticket
+                review.save()
+                return redirect('home')
+        else:
+            ticket_form = TicketForm()
+            review_form = ReviewForm()
+        return render(request, 'review/create_review.html', {
+            'ticket_form': ticket_form,
+            'review_form': review_form,
+        })
 
 
 @login_required
