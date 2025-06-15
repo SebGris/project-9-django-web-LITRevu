@@ -136,7 +136,7 @@ def flux(request):
 
 @login_required
 def posts(request):
-    posts = models.Ticket.objects.all()
+    posts = models.Ticket.objects.filter(user=request.user)
     return render(request, 'review/posts.html', context={'posts': posts}, )
 
 

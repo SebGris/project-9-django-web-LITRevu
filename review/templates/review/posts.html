@@ -22,7 +22,9 @@
             <div class="post">
                 <p>Vous avez publié un ticket</p>
                 <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
-                <img src="{{ post.image.url }}">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}">
+                {% endif %}
                 <p>{{ post.title }}</p>
                 <p>
                     <a href="{% url 'edit_ticket' post.id %}">Modifier</a>
