@@ -135,7 +135,21 @@ def reviews(request):
 
 @login_required
 def flux(request):
-    flux = models.Ticket.objects.filter(user=request.user)
+    # Récupérer les utilisateurs suivis
+    followed_users = models.UserFollows.objects.filter(user=request.user).values_list('followed_user', flat=True)
+    users_to_show = list(followed_users) + [request.user.id]
+    tickets = models.Ticket.objects.filter(user__id__in=users_to_show)
+    reviews = models.Review.objects.filter(user__id__in=users_to_show)
+    # On ajoute un attribut post_type à chaque objet
+    for t in tickets:
+        t.post_type = 'ticket'
+    for r in reviews:
+        r.post_type = 'review'
+    flux = sorted(
+        list(tickets) + list(reviews),
+        key=lambda obj: getattr(obj, 'time_created', None),
+        reverse=True
+    )
     return render(request, 'review/flux.html', context={'flux': flux}, )
 
 

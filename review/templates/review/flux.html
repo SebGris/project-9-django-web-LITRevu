@@ -28,15 +28,23 @@
     <div class="grid-container">
         {% for post in flux %}
             <div class="post">
-                <p>Vous avez publié un ticket</p>
-                <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
-                {% if post.image %}
-                    <img src="{{ post.image.url }}">
+                {% if post.post_type == 'ticket' %}
+                    <p>{{ post.user }} a publié un ticket</p>
+                    <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}">
+                    {% endif %}
+                    <p>{{ post.title }}</p>
+                    <a href="{% url 'review_create_for_ticket' post.id %}">
+                        <button type="button">Créer une critique</button>
+                    </a>
+                {% elif post.post_type == 'review' %}
+                    <p>{{ post.user }} a publié une critique</p>
+                    <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
+                    <p><b>{{ post.headline }}</b></p>
+                    <p>Note : {{ post.rating }}/5</p>
+                    <p>{{ post.body }}</p>
                 {% endif %}
-                <p>{{ post.title }}</p>
-                <a href="{% url 'review_create_for_ticket' post.id %}">
-                    <button type="button">Créer une critique</button>
-                </a>
             </div>
         {% endfor %}
     </div>
