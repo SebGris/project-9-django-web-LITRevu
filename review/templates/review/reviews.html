@@ -2,19 +2,29 @@
 {% block content %}
     <h2>Liste des critiques</h2>
     <div class="grid-container">
-        {% for review in reviews %}
-            <div class="post">
-                <p>{{ review.ticket }}</p>
-                <p>{{ review.rating }}</p>
-                <p>{{ review.headline }}</p>
-                <p>{{ review.body }}</p>
-                <p>{{ review.user }}</p>
-                <p>{{ review.time_created}}</p>
-                <p>
-                    <a href="{% url 'edit_review' review.id %}">Modifier</a>
-                    |
-                    <a href="{% url 'delete_review' review.id %}">Supprimer</a>
-                </p>
+        {% for post in reviews %}
+            <div class="post" style="border:2px solid #4a90e2; background:#f7faff;">
+                {% if post.user == user %}
+                    <p>Vous avez publié une critique</p>
+                {% else %}
+                    <p>{{ post.user }} a publié une critique</p>
+                {% endif %}
+                <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
+                <p><b>{{ post.headline }}</b></p>
+                <p>Note : {{ post.rating }}/5</p>
+                <p>{{ post.body }}</p>
+                <div style="border:1px solid #aaa; background:#fff; margin:16px 0; padding:10px;">
+                    <span>Ticket - {% if post.ticket.user == user %}Vous{% else %}{{ post.ticket.user }}{% endif %}</span><br>
+                    <span>{{ post.ticket.title }}</span><br>
+                    <span>{{ post.ticket.description }}</span>
+                    {% if post.ticket.image %}<br>
+                        <img src="{{ post.ticket.image.url }}" style="max-width:100px;max-height:100px;">
+                    {% endif %}
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <a href="{% url 'edit_review' post.id %}"><button type="button">Modifier</button></a>
+                    <a href="{% url 'delete_review' post.id %}"><button type="button" style="color:red;">Supprimer</button></a>
+                </div>
             </div>
         {% endfor %}
     </div>

@@ -1,5 +1,3 @@
-from itertools import chain
-
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import formset_factory
 from django.db.models import Q
@@ -34,10 +32,7 @@ def create_review(request, ticket_id=None):
         if request.method == 'POST':
             ticket_form = TicketForm(request.POST, request.FILES, instance=ticket)
             review_form = ReviewForm(request.POST)
-            if ticket_form.is_valid() and review_form.is_valid():
-                ticket = ticket_form.save(commit=False)
-                ticket.user = request.user
-                ticket.save()
+            if review_form.is_valid():
                 review = review_form.save(commit=False)
                 review.user = request.user
                 review.ticket = ticket
@@ -140,6 +135,11 @@ def flux(request):
     users_to_show = list(followed_users) + [request.user.id]
     tickets = models.Ticket.objects.filter(user__id__in=users_to_show)
     reviews = models.Review.objects.filter(user__id__in=users_to_show)
+    # Récupérer les tickets de l'utilisateur connecté
+    user_tickets = models.Ticket.objects.filter(user=request.user)
+    # Ajouter les reviews en réponse aux tickets de l'utilisateur connecté
+    reviews_on_user_tickets = models.Review.objects.filter(ticket__in=user_tickets)
+    reviews = reviews | reviews_on_user_tickets  # Utilisez union si reviews est un QuerySet
     # On ajoute un attribut post_type à chaque objet
     for t in tickets:
         t.post_type = 'ticket'
