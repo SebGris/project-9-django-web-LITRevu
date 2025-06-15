@@ -2,7 +2,7 @@
 {% block content %}
     <h2>Suivre d'autres utilisateurs</h2>
     {% if message %}
-        <div style="color: #b94a48;">{{ message }}</div>
+        <div style="color: red;">{{ message }}</div>
     {% endif %}
     <form method="post">
         {{ form.as_p }}
@@ -10,19 +10,30 @@
         <button type="submit" >Envoyer</button>
     </form>
     <h2>Abonnements</h2>
-    <ul>
+    <table style="width:100%; border-collapse:collapse; border:2px solid #333;">
+
         {% for follow in following %}
-            <li>{{ follow.followed_user }}</li>
+            <tr>
+                <td style="border:1px solid #333; padding:8px;">{{ follow.followed_user }}</td>
+                <td style="border:1px solid #333; padding:8px;">
+                    <form method="post" action="{% url 'unfollow_user' follow.followed_user.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="color:#333;">Désabonner</button>
+                    </form>
+                </td>
+            </tr>
         {% empty %}
-            <li>Vous ne suivez personne.</li>
+            <tr><td colspan="2" style="border:1px solid #333; padding:8px;">Vous ne suivez personne.</td></tr>
         {% endfor %}
-    </ul>
+    </table>
     <h2>Abonnés</h2>
-    <ul>
+    <table style="width:100%; border-collapse:collapse; border:2px solid #333;">
         {% for follow in followers %}
-            <li>{{ follow.user }}</li>
+            <tr>
+                <td style="border:1px solid #333; padding:8px;">{{ follow.user }}</td>
+            </tr>
         {% empty %}
-            <li>Aucun abonné.</li>
+            <tr><td style="border:1px solid #333; padding:8px;">Aucun abonné.</td></tr>
         {% endfor %}
-    </ul>
+    </table>
 {% endblock content %}

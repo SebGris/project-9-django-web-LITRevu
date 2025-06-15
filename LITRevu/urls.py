@@ -6,6 +6,7 @@ from django.contrib.auth.views import (
 from django.urls import path
 import authentication.views
 import review.views
+from review.unfollow import unfollow_user
 
 
 urlpatterns = [
@@ -32,6 +33,7 @@ urlpatterns = [
     path('review/<int:review_id>/delete', review.views.delete_review,
          name='delete_review'),
     path('follow-users/', review.views.follow_users, name='follow_users'),
+    path('unfollow/<int:user_id>/', unfollow_user, name='unfollow_user'),
 ]
 
 if settings.DEBUG:
