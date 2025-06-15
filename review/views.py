@@ -155,7 +155,18 @@ def flux(request):
 
 @login_required
 def posts(request):
-    posts = models.Ticket.objects.filter(user=request.user)
+    tickets = models.Ticket.objects.filter(user=request.user)
+    reviews = models.Review.objects.filter(user=request.user)
+    # On ajoute un attribut post_type à chaque objet
+    for t in tickets:
+        t.post_type = 'ticket'
+    for r in reviews:
+        r.post_type = 'review'
+    posts = sorted(
+        list(tickets) + list(reviews),
+        key=lambda obj: getattr(obj, 'time_created', None),
+        reverse=True
+    )
     return render(request, 'review/posts.html', context={'posts': posts}, )
 
 @login_required
