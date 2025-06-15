@@ -5,6 +5,8 @@ from django.forms import formset_factory
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
+from .models import UserFollows
+
 
 from . import forms, models
 
@@ -142,6 +144,12 @@ def posts(request):
     posts = models.Ticket.objects.filter(user=request.user)
     return render(request, 'review/posts.html', context={'posts': posts}, )
 
+@login_required
+def unfollow_user(request, user_id):
+    if request.method == "POST":
+        follow = get_object_or_404(UserFollows, user=request.user, followed_user__id=user_id)
+        follow.delete()
+    return redirect('follow_users')
 
 @login_required
 def follow_users(request):
