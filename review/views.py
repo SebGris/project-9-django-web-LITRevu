@@ -118,7 +118,7 @@ def delete_review(request, review_id):
     if request.method == 'POST':
         review.delete()
         return redirect('home')
-    return render(request, 'review/delete_review.html' )
+    return render(request, 'review/delete_review.html')
 
 
 @login_required

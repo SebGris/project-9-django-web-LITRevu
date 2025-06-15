@@ -27,9 +27,37 @@
     </div>
     <div class="grid-container">
         {% for post in flux %}
-            <div class="post">
-                {% if post.post_type == 'ticket' %}
-                    <p>{{ post.user }} a publié un ticket</p>
+            {% if post.post_type == 'review' %}
+                <div class="post" style="border:2px solid #4a90e2; background:#f7faff;">
+                    {% if post.user == user %}
+                        <p><b>Vous avez publié une critique</b></p>
+                    {% else %}
+                        <p><b>{{ post.user }} a publié une critique</b></p>
+                    {% endif %}
+                    <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
+                    <p><b>{{ post.headline }}</b></p>
+                    <p>Note : {{ post.rating }}/5</p>
+                    <p>{{ post.body }}</p>
+                    <div style="border:1px solid #aaa; background:#fff; margin:16px 0; padding:10px;">
+                        <b>Ticket associé :</b><br>
+                        <span><b>{{ post.ticket.title }}</b></span><br>
+                        <span>{{ post.ticket.description }}</span>
+                        {% if post.ticket.image %}<br>
+                            <img src="{{ post.ticket.image.url }}" style="max-width:100px;max-height:100px;">
+                        {% endif %}
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <a href="{% url 'edit_review' post.id %}"><button type="button">Modifier</button></a>
+                        <a href="{% url 'delete_review' post.id %}"><button type="button" style="color:red;">Supprimer</button></a>
+                    </div>
+                </div>
+            {% elif post.post_type == 'ticket' %}
+                <div class="post">
+                    {% if post.user == user %}
+                        <p>Vous avez publié un ticket</p>
+                    {% else %}
+                        <p>{{ post.user }} a publié un ticket</p>
+                    {% endif %}
                     <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
                     {% if post.image %}
                         <img src="{{ post.image.url }}">
@@ -38,14 +66,8 @@
                     <a href="{% url 'review_create_for_ticket' post.id %}">
                         <button type="button">Créer une critique</button>
                     </a>
-                {% elif post.post_type == 'review' %}
-                    <p>{{ post.user }} a publié une critique</p>
-                    <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
-                    <p><b>{{ post.headline }}</b></p>
-                    <p>Note : {{ post.rating }}/5</p>
-                    <p>{{ post.body }}</p>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock content %}
