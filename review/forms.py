@@ -27,7 +27,10 @@ class ReviewForm(forms.ModelForm):
 
 class FollowUsersForm(forms.Form):
     username = forms.CharField(
-        label="Nom d'utilisateur à suivre",
+        label="",
         max_length=150,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "Nom d'utilisateur"
+        })
     )
