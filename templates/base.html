@@ -23,6 +23,34 @@
                 text-decoration: none;
                 margin-left: 20px;
             }
+            .container {
+                padding: 20px;
+            }
+            .messages {
+                list-style-type: none;
+                padding: 0;
+            }
+            .messages li {
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+            .messages .error {
+                background-color: #f8d7da;
+                color: #721c24;
+            }
+            .messages .success {
+                background-color: #d4edda;
+                color: #155724;
+            }
+            .messages .info {
+                background-color: #d1ecf1;
+                color: #0c5460;
+            }
+            .messages .warning {
+                background-color: #fff3cd;
+                color: #856404;
+            }
         </style>
     </head>
     <body>
@@ -39,6 +67,15 @@
                     <button type="submit" style="background:none;border:none;color:#fff;text-decoration:underline;cursor:pointer;padding:0;">Se déconnecter</button>
                 </form>
                 <p>({{ user.username }})</p>
+            {% endif %}
+        </div>
+        <div class="container">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         </div>
         <div class="main">
