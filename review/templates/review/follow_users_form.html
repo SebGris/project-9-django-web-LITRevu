@@ -1,9 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Suivre des utilisateurs</h2>
+    <h2>Suivre d'autres utilisateurs</h2>
+    {% if message %}
+        <div style="color: #b94a48;">{{ message }}</div>
+    {% endif %}
     <form method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit" >Confirmer</button>
+        <button type="submit" >Envoyer</button>
     </form>
+    <h2>Abonnements</h2>
+    <ul>
+        {% for follow in following %}
+            <li>{{ follow.followed_user }}</li>
+        {% empty %}
+            <li>Vous ne suivez personne.</li>
+        {% endfor %}
+    </ul>
+    <h2>Abonnés</h2>
+    <ul>
+        {% for follow in followers %}
+            <li>{{ follow.user }}</li>
+        {% empty %}
+            <li>Aucun abonné.</li>
+        {% endfor %}
+    </ul>
 {% endblock content %}

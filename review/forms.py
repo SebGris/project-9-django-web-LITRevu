@@ -25,7 +25,9 @@ class ReviewForm(forms.ModelForm):
         }
 
 
-class FollowUsersForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['follows']
+class FollowUsersForm(forms.Form):
+    username = forms.CharField(
+        label="Nom d'utilisateur à suivre",
+        max_length=150,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )

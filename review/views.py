@@ -4,8 +4,11 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import formset_factory
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth import get_user_model
 
 from . import forms, models
+
+User = get_user_model()
 
 
 @login_required
@@ -142,11 +145,25 @@ def posts(request):
 
 @login_required
 def follow_users(request):
-    form = forms.FollowUsersForm(instance=request.user)
+    message = None
     if request.method == 'POST':
-        form = forms.FollowUsersForm(request.POST, instance=request.user)
+        form = forms.FollowUsersForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('home')
+            username = form.cleaned_data['username']
+            try:
+                user_to_follow = User.objects.get(username=username)
+                if user_to_follow == request.user:
+                    message = "Vous ne pouvez pas vous suivre vous-même."
+                elif models.UserFollows.objects.filter(user=request.user, followed_user=user_to_follow).exists():
+                    message = f"Vous suivez déjà {username}."
+                else:
+                    models.UserFollows.objects.create(user=request.user, followed_user=user_to_follow)
+                    message = f"Vous suivez maintenant {username}."
+            except User.DoesNotExist:
+                message = f"L'utilisateur '{username}' n'existe pas."
+    else:
+        form = forms.FollowUsersForm()
+    followers = models.UserFollows.objects.filter(followed_user=request.user)
+    following = models.UserFollows.objects.filter(user=request.user)
     return render(request, 'review/follow_users_form.html',
-                  context={'form': form})
+                  context={'form': form, 'followers': followers, 'following': following, 'message': message})
