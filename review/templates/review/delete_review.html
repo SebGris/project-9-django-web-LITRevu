@@ -2,7 +2,6 @@
 {% block content %}
     <h2>Supprimer votre critique ?</h2>
     <form method="post">
-        {{ delete_form }}
         {% csrf_token %}
         <button type="submit" >Supprimer</button>
     </form>

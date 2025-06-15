@@ -20,7 +20,7 @@
     <div class="grid-container">
         {% for post in posts %}
             <div class="post">
-                <p>Vous avez publier un ticket</p>
+                <p>Vous avez publié un ticket</p>
                 <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
                 <img src="{{ post.image.url }}">
                 <p>{{ post.title }}</p>

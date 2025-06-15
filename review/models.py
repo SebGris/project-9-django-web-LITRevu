@@ -12,6 +12,12 @@ class Ticket(models.Model):
     image = models.ImageField(blank=True, null=True)  # upload_to='tickets/',
     time_created = models.DateTimeField(default=timezone.now)
 
+    def delete(self, *args, **kwargs):
+        # delete the image file when the ticket is deleted
+        if self.image:
+            self.image.delete(save=False)
+        super().delete(*args, **kwargs)
+
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
