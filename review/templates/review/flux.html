@@ -19,12 +19,13 @@
     </style>
     <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 20px;">
         <a href="{% url 'ticket_create' %}">
-            <button type="button">Demander une critique</button>
+            <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Demander une critique</button>
         </a>
         <a href="{% url 'review_create' %}">
-            <button type="button">Créer une critique</button>
+            <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Créer une critique</button>
         </a>
     </div>
+    <button class="btn btn-success">Rafraîchir</button>
     <div class="grid-container">
         {% for post in flux %}
             {% if post.post_type == 'review' %}

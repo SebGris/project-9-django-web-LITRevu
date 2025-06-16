@@ -2,8 +2,6 @@
 <html>
     <head>
         <title>LITRevu</title>
-        {% tailwind_css %}
-        <link rel="stylesheet" href="{% static 'app.css' %}">
         <style>
             .navbar {
                 width: 100%;
@@ -27,32 +25,8 @@
             .container {
                 padding: 20px;
             }
-            .messages {
-                list-style-type: none;
-                padding: 0;
-            }
-            .messages li {
-                padding: 10px;
-                margin-bottom: 10px;
-                border-radius: 5px;
-            }
-            .messages .error {
-                background-color: #f8d7da;
-                color: #721c24;
-            }
-            .messages .success {
-                background-color: #d4edda;
-                color: #155724;
-            }
-            .messages .info {
-                background-color: #d1ecf1;
-                color: #0c5460;
-            }
-            .messages .warning {
-                background-color: #fff3cd;
-                color: #856404;
-            }
         </style>
+        {% tailwind_css %}
     </head>
     <body>
         <div class="navbar">
