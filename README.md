@@ -95,6 +95,12 @@ Suivez les instructions pour définir un nom d’utilisateur, une adresse email 
 python manage.py runserver
 ```
 
+### ▶️ Démarrez le serveur de développement Tailwind
+
+```bash
+python manage.py tailwind start
+```
+
 L’application sera alors disponible à l’adresse suivante :  
 👉 http://127.0.0.1:8000/
 
