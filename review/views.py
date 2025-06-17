@@ -124,12 +124,6 @@ def delete_review(request, review_id):
     return render(request, 'review/delete_review.html')
 
 
-# @login_required
-# def home(request):
-#     posts = models.Ticket.objects.all()
-#     return render(request, 'review/home.html', context={'posts': posts}, )
-
-
 @login_required
 def reviews(request):
     reviews = models.Review.objects.all()
@@ -149,13 +143,13 @@ def flux(request):
     reviews_on_user_tickets = models.Review.objects.filter(ticket__in=user_tickets)
     reviews = reviews | reviews_on_user_tickets  # Utilisez union si reviews est un QuerySet
     # On ajoute un attribut post_type à chaque objet
-    for t in tickets:
+    for t in tickets:   # annotate
         t.post_type = 'ticket'
     for r in reviews:
         r.post_type = 'review'
     flux = sorted(
         list(tickets) + list(reviews),
-        key=lambda obj: getattr(obj, 'time_created', None),
+        key=lambda obj: obj.time_created,
         reverse=True
     )
     return render(request, 'review/flux.html', context={'flux': flux}, )
