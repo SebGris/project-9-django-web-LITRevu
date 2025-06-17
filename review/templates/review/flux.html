@@ -35,6 +35,9 @@
                     {% endif %}
                     <span class="font-bold text-lg text-gray-800">{{ post.title }}</span><br>
                     <span>{{ post.description }}</span>
+                    <a href="{% url 'review_create_for_ticket' post.id %}">
+                    <button type="button">Créer une critique</button>
+                </a>
                 </div>
             {% endif %}
         {% endfor %}
