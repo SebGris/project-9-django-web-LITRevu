@@ -22,7 +22,7 @@ def create_ticket(request):
             ticket.user = request.user
             ticket.save()
             messages.success(request, "Ticket créé avec succès !")
-            return redirect('home')
+            return redirect('flux')
     return render(request, 'review/create_ticket.html', context={'form': form})
 
 
@@ -40,7 +40,7 @@ def create_review(request, ticket_id=None):
                 review.ticket = ticket
                 review.save()
                 messages.success(request, "Critique ajoutée avec succès !")
-                return redirect('home')
+                return redirect('flux')
         else:
             ticket_form = TicketForm(instance=ticket)
             review_form = ReviewForm()
@@ -62,7 +62,7 @@ def create_review(request, ticket_id=None):
                 review.ticket = ticket
                 review.save()
                 messages.success(request, "Ticket et critique créés avec succès !")
-                return redirect('home')
+                return redirect('flux')
         else:
             ticket_form = TicketForm()
             review_form = ReviewForm()
@@ -81,7 +81,7 @@ def edit_ticket(request, ticket_id):
         if edit_form.is_valid():
             edit_form.save()
             messages.success(request, "Ticket modifié avec succès !")
-            return redirect('home')
+            return redirect('flux')
     context = {
         'edit_form': edit_form,
     }
@@ -97,7 +97,7 @@ def edit_review(request, review_id):
         if edit_form.is_valid():
             edit_form.save()
             messages.success(request, "Critique modifiée avec succès !")
-            return redirect('home')
+            return redirect('flux')
     context = {
         'edit_form': edit_form,
     }
@@ -110,7 +110,7 @@ def delete_ticket(request, ticket_id):
     if request.method == 'POST':
         ticket.delete()
         messages.success(request, "Ticket supprimé avec succès !")
-        return redirect('home')
+        return redirect('flux')
     return render(request, 'review/delete_ticket.html')
 
 
@@ -120,14 +120,14 @@ def delete_review(request, review_id):
     if request.method == 'POST':
         review.delete()
         messages.success(request, "Critique supprimée avec succès !")
-        return redirect('home')
+        return redirect('flux')
     return render(request, 'review/delete_review.html')
 
 
-@login_required
-def home(request):
-    posts = models.Ticket.objects.all()
-    return render(request, 'review/home.html', context={'posts': posts}, )
+# @login_required
+# def home(request):
+#     posts = models.Ticket.objects.all()
+#     return render(request, 'review/home.html', context={'posts': posts}, )
 
 
 @login_required
