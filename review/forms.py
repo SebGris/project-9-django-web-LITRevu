@@ -31,6 +31,7 @@ class FollowUsersForm(forms.Form):
         max_length=150,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': "Nom d'utilisateur"
+            'placeholder': "Nom d'utilisateur",
+            'autocomplete': 'off'
         })
     )

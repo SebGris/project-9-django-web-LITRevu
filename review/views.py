@@ -127,7 +127,11 @@ def delete_review(request, review_id):
 @login_required
 def reviews(request):
     reviews = models.Review.objects.all()
-    return render(request, 'review/reviews.html', context={'reviews': reviews}, )
+    return render(
+        request,
+        'review/reviews.html',
+        context={'reviews': reviews},
+    )
 
 
 @login_required
@@ -174,7 +178,11 @@ def posts(request):
 @login_required
 def unfollow_user(request, user_id):
     if request.method == "POST":
-        follow = get_object_or_404(UserFollows, user=request.user, followed_user__id=user_id)
+        follow = get_object_or_404(
+            UserFollows,
+            user=request.user,
+            followed_user__id=user_id
+        )
         follow.delete()
     return redirect('follow_users')
 
@@ -189,10 +197,16 @@ def follow_users(request):
                 user_to_follow = User.objects.get(username=username)
                 if user_to_follow == request.user:
                     message = "Vous ne pouvez pas vous suivre vous-même."
-                elif models.UserFollows.objects.filter(user=request.user, followed_user=user_to_follow).exists():
+                elif models.UserFollows.objects.filter(
+                    user=request.user,
+                    followed_user=user_to_follow
+                ).exists():
                     message = f"Vous suivez déjà {username}."
                 else:
-                    models.UserFollows.objects.create(user=request.user, followed_user=user_to_follow)
+                    models.UserFollows.objects.create(
+                        user=request.user,
+                        followed_user=user_to_follow
+                        )
                     message = f"Vous suivez maintenant {username}."
             except User.DoesNotExist:
                 message = f"L'utilisateur '{username}' n'existe pas."
@@ -200,5 +214,13 @@ def follow_users(request):
         form = forms.FollowUsersForm()
     followers = models.UserFollows.objects.filter(followed_user=request.user)
     following = models.UserFollows.objects.filter(user=request.user)
-    return render(request, 'review/follow_users_form.html',
-                  context={'form': form, 'followers': followers, 'following': following, 'message': message})
+    return render(
+        request,
+        'review/follow_users_form.html',
+        context={
+            'form': form,
+            'followers': followers,
+            'following': following,
+            'message': message
+        }
+    )

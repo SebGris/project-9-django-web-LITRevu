@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2 class="text-center my-8">Suivre d'autres utilisateurs</h2>
-    {% if message %}
-        <div style="color: red;">{{ message }}</div>
-    {% endif %}
     <form method="post">
         <div style="display: flex; align-items: flex-end; gap: 1rem;">
             {{ form.as_p }}
@@ -11,6 +8,9 @@
         </div>
         {% csrf_token %}
     </form>
+    {% if message %}
+        <div style="color: red;">{{ message }}</div>
+    {% endif %}
     <h2 class="text-center my-8">Abonnements</h2>
     <table style="width:100%; border-collapse:collapse; border:2px solid #333;">
         {% for follow in following %}
