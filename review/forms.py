@@ -32,6 +32,7 @@ class FollowUsersForm(forms.Form):
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': "Nom d'utilisateur",
-            'autocomplete': 'off'
+            'autocomplete': 'off',
+            'style': 'border:2px solid #333;'
         })
     )

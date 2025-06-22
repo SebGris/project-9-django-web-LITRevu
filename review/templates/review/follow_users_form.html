@@ -3,7 +3,7 @@
     <h2 class="text-center my-8">Suivre d'autres utilisateurs</h2>
     <form method="post">
         <div style="display: flex; align-items: flex-end; gap: 1rem;">
-            {{ form.as_p }}
+            {{ form.username }}
             <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>
         </div>
         {% csrf_token %}

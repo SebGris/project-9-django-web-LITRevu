@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Modifier votre ticket</h2>
+    <h2 class="text-center my-8">Modifier votre ticket</h2>
     <form method="post">
         {{ edit_form.as_p }}
         {% csrf_token %}
