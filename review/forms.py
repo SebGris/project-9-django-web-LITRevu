@@ -16,8 +16,21 @@ class TicketForm(forms.ModelForm):
             'image': 'Image',
         }
         widgets = {
-            'title': forms.TextInput(attrs={'style': 'border:2px solid #333; width:100%; text-align:center;'}),
-            'description': forms.Textarea(attrs={'style': 'border:2px solid #333; width:100%;', 'rows': 8}),
+            'title': forms.TextInput(
+                attrs={
+                    'style': (
+                        'border:2px solid #333; '
+                        'width:100%; '
+                        'text-align:center;'
+                    )
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'style': 'border:2px solid #333; width:100%;',
+                    'rows': 8
+                }
+            ),
         }
 
 
@@ -33,8 +46,15 @@ class ReviewForm(forms.ModelForm):
         }
         widgets = {
             'rating': forms.NumberInput(attrs={'class': 'form-control'}),
-            'headline': forms.TextInput(attrs={'style': 'border:2px solid #333; width:100%;'}),
-            'body': forms.Textarea(attrs={'style': 'border:2px solid #333; width:100%;', 'rows': 8}),
+            'headline': forms.TextInput(
+                attrs={'style': 'border:2px solid #333; width:100%;'}
+            ),
+            'body': forms.Textarea(
+                attrs={
+                    'style': 'border:2px solid #333; width:100%;',
+                    'rows': 8
+                }
+            ),
         }
 
 

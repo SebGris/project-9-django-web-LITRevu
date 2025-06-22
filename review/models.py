@@ -9,13 +9,16 @@ class Ticket(models.Model):
     description = models.CharField(max_length=2048, blank=True)
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    image = models.ImageField(blank=True, null=True)  # upload_to='tickets/',
+    image = models.ImageField(blank=True, null=True)
     time_created = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         if self.pk:
             old_ticket = Ticket.objects.filter(pk=self.pk).first()
-            if old_ticket and old_ticket.image and self.image and old_ticket.image != self.image:
+            if (
+                old_ticket and old_ticket.image and self.image
+                and old_ticket.image != self.image
+            ):
                 old_ticket.image.delete(save=False)
         super().save(*args, **kwargs)
 
