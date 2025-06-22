@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Suivre d'autres utilisateurs</h2>
+    <h2 class="text-center my-8">Suivre d'autres utilisateurs</h2>
     {% if message %}
         <div style="color: red;">{{ message }}</div>
     {% endif %}
     <form method="post">
-        {{ form.as_p }}
+        <div style="display: flex; align-items: flex-end; gap: 1rem;">
+            {{ form.as_p }}
+            <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>
+        </div>
         {% csrf_token %}
-        <button type="submit" >Envoyer</button>
     </form>
-    <h2>Abonnements</h2>
+    <h2 class="text-center my-8">Abonnements</h2>
     <table style="width:100%; border-collapse:collapse; border:2px solid #333;">
-
         {% for follow in following %}
             <tr>
-                <td style="border:1px solid #333; padding:8px;">{{ follow.followed_user }}</td>
-                <td style="border:1px solid #333; padding:8px;">
+                <td style="border:1px solid #333; padding:8px; width:100%;">{{ follow.followed_user }}</td>
+                <td style="border:1px solid #333; padding:8px; white-space:nowrap;">
                     <form method="post" action="{% url 'unfollow-user' follow.followed_user.id %}" style="display:inline;">
                         {% csrf_token %}
-                        <button type="submit" style="color:#333;">Désabonner</button>
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Désabonner</button>
                     </form>
                 </td>
             </tr>
@@ -26,7 +27,7 @@
             <tr><td colspan="2" style="border:1px solid #333; padding:8px;">Vous ne suivez personne.</td></tr>
         {% endfor %}
     </table>
-    <h2>Abonnés</h2>
+    <h2 class="text-center my-8">Abonnés</h2>
     <table style="width:100%; border-collapse:collapse; border:2px solid #333;">
         {% for follow in followers %}
             <tr>

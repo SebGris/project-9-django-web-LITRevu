@@ -31,7 +31,7 @@
                     <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié un ticket{% else %}{{ post.user }} a publié un ticket{% endif %}</p>
                     {% include "review/_ticket.html" %}
                     <a href="{% url 'review-create-for-ticket' post.id %}">
-                    <button type="button">Créer une critique</button>
+                    <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
                 </a>
                 </div>
             {% endif %}
