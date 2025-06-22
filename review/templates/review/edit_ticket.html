@@ -2,18 +2,8 @@
 {% block content %}
     <h2 class="text-center my-8">Modifier votre ticket</h2>
     <form method="post" enctype="multipart/form-data" style="width:100%;">
+        {% include 'review/_form_ticket.html' with form=edit_form %}
         {% csrf_token %}
-        <div class="mb-4">
-            <label for="{{ edit_form.title.id_for_label }}" class="block font-semibold mb-4">{{ edit_form.title.label }}</label>
-            {{ edit_form.title }}
-        </div>
-        <div class="mb-4">
-            <label for="{{ edit_form.description.id_for_label }}" class="block font-semibold mb-4">{{ edit_form.description.label }}</label>
-            {{ edit_form.description }}
-        </div>
-        <div class="mb-4">
-            {% include 'review/_form_image.html' with form=edit_form %}
-        </div>
         <div style="width:100%; display:flex; justify-content:flex-end;">
             <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>
         </div>
