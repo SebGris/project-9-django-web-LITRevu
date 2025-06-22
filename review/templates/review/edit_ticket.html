@@ -12,18 +12,7 @@
             {{ edit_form.description }}
         </div>
         <div class="mb-4">
-            <label for="{{ edit_form.image.id_for_label }}" class="block font-semibold mb-4">{{ edit_form.image.label }}</label>
-            {% if edit_form.instance.image %}
-                <div class="my-2">
-                    <img src="{{ edit_form.instance.image.url }}" alt="Image actuelle" style="max-width: 200px; max-height: 200px; border:1px solid #ccc; border-radius:4px;">
-                </div>
-            {% endif %}
-            <input type="file" name="image" id="custom-image-input" style="display:none;">
-            <button type="button"
-                onclick="document.getElementById('custom-image-input').click();"
-                class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition mt-2">
-                Télécharger fichier
-            </button>
+            {% include 'review/_form_image.html' with form=edit_form %}
         </div>
         <div style="width:100%; display:flex; justify-content:flex-end;">
             <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>

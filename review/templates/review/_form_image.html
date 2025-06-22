@@ -1,0 +1,36 @@
+{# Partial pour formulaire image #}
+<label for="{{ form.image.id_for_label }}" class="block font-semibold mb-4">{{ form.image.label }}</label>
+<div>
+    {% if form.instance.image %}
+        <div class="my-2">
+            <img id="image-preview"
+                 src="{{ form.instance.image.url }}"
+                 alt="Image actuelle"
+                 style="max-width: 200px; max-height: 200px; border:1px solid #ccc; border-radius:4px;">
+        </div>
+    {% else %}
+        <img id="image-preview"
+             src=""
+             alt="Aperçu"
+             style="display:none; max-width: 200px; max-height: 200px; border:1px solid #ccc; border-radius:4px;">
+    {% endif %}
+</div>
+<input type="file" name="image" id="custom-image-input" style="display:none;" accept="image/*">
+<button type="button"
+    onclick="document.getElementById('custom-image-input').click();"
+    class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition mt-2">
+    Télécharger fichier
+</button>
+<script>
+    const input = document.getElementById('custom-image-input');
+    const preview = document.getElementById('image-preview');
+    if (input && preview) {
+        input.addEventListener('change', function(event) {
+            const [file] = input.files;
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        });
+    }
+</script>

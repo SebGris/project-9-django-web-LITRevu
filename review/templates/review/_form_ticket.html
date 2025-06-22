@@ -1,0 +1,14 @@
+{# Partial pour formulaire d'un ticket #}
+<div class="ticket">
+    <div class="mb-4">
+        <label for="{{ form.title.id_for_label }}" class="block font-semibold mb-4">{{ form.title.label }}</label>
+        {{ form.title }}
+    </div>
+    <div class="mb-4">
+        <label for="{{ form.description.id_for_label }}" class="block font-semibold mb-4">{{ form.description.label }}</label>
+        {{ form.description }}
+    </div>
+    <div class="mb-4">
+        {% include 'review/_form_image.html' with form=form %}
+    </div>
+</div>

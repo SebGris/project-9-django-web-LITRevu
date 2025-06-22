@@ -2,8 +2,10 @@
 {% block content %}
     <h2 class="text-center my-8">Créer un ticket</h2>
     <form method="post" enctype="multipart/form-data">
-        {{ form.as_p }}
+        {% include 'review/_form_ticket.html' with form=form %}
         {% csrf_token %}
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition" >Envoyer</button>
+        <div style="width:100%; display:flex; justify-content:flex-end;">
+            <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32" >Envoyer</button>
+        </div>
     </form>
 {% endblock content %}

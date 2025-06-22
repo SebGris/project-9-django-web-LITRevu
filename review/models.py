@@ -12,6 +12,13 @@ class Ticket(models.Model):
     image = models.ImageField(blank=True, null=True)  # upload_to='tickets/',
     time_created = models.DateTimeField(default=timezone.now)
 
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_ticket = Ticket.objects.filter(pk=self.pk).first()
+            if old_ticket and old_ticket.image and self.image and old_ticket.image != self.image:
+                old_ticket.image.delete(save=False)
+        super().save(*args, **kwargs)
+
     def delete(self, *args, **kwargs):
         # delete the image file when the ticket is deleted
         if self.image:
