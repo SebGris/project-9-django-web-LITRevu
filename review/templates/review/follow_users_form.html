@@ -16,7 +16,7 @@
             <tr>
                 <td style="border:1px solid #333; padding:8px;">{{ follow.followed_user }}</td>
                 <td style="border:1px solid #333; padding:8px;">
-                    <form method="post" action="{% url 'unfollow_user' follow.followed_user.id %}" style="display:inline;">
+                    <form method="post" action="{% url 'unfollow-user' follow.followed_user.id %}" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" style="color:#333;">Désabonner</button>
                     </form>

@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="flex gap-4 items-center mb-8">
-        <a href="{% url 'ticket_create' %}">
+        <a href="{% url 'ticket-create' %}">
             <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Demander une critique</button>
         </a>
-        <a href="{% url 'review_create' %}">
+        <a href="{% url 'review-create' %}">
             <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
         </a>
     </div>
@@ -35,7 +35,7 @@
                     {% endif %}
                     <span class="font-bold text-lg text-gray-800">{{ post.title }}</span><br>
                     <span>{{ post.description }}</span>
-                    <a href="{% url 'review_create_for_ticket' post.id %}">
+                    <a href="{% url 'review-create-for-ticket' post.id %}">
                     <button type="button">Créer une critique</button>
                 </a>
                 </div>

@@ -39,8 +39,8 @@
                         {% endif %}
                     </div>
                     <div style="display:flex; gap:10px;">
-                        <a href="{% url 'edit_review' post.id %}"><button type="button">Modifier</button></a>
-                        <a href="{% url 'delete_review' post.id %}"><button type="button" style="color:red;">Supprimer</button></a>
+                        <a href="{% url 'edit-review' post.id %}"><button type="button">Modifier</button></a>
+                        <a href="{% url 'delete-review' post.id %}"><button type="button" style="color:red;">Supprimer</button></a>
                     </div>
                 </div>
             {% elif post.post_type == 'ticket' %}
