@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="flex gap-4 items-center mb-8">
-        <a href="{% url 'ticket-create' %}">
-            <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Demander une critique</button>
+    <div class="flex gap-4 items-center mb-8 w-full px-2">
+        <a href="{% url 'ticket-create' %}" class="flex-1 mx-6">
+            <button type="button" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Demander une critique</button>
         </a>
-        <a href="{% url 'review-create' %}">
-            <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
+        <a href="{% url 'review-create' %}" class="flex-1 mx-6">
+            <button type="button" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
         </a>
     </div>
     <div class="grid-container">
@@ -30,9 +30,11 @@
                 <div class="bg-white rounded-lg shadow p-6 mb-4">
                     <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié un ticket{% else %}{{ post.user }} a publié un ticket{% endif %}</p>
                     {% include "review/_ticket.html" %}
-                    <a href="{% url 'review-create-for-ticket' post.id %}">
-                    <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
-                </a>
+                    <div style="text-align: right; width: 100%;">
+                        <a href="{% url 'review-create-for-ticket' post.id %}">
+                            <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
+                        </a>
+                    </div>
                 </div>
             {% endif %}
         {% endfor %}

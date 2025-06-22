@@ -38,9 +38,9 @@
                             <img src="{{ post.ticket.image.url }}" style="max-width:100px;max-height:100px;">
                         {% endif %}
                     </div>
-                    <div style="display:flex; gap:10px;">
-                        <a href="{% url 'edit-review' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Modifier</button></a>
-                        <a href="{% url 'delete-review' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Supprimer</button></a>
+                    <div style="width:100%; display:flex; justify-content:flex-end; gap:10px;">
+                        <a href="{% url 'edit-review' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition w-32">Modifier</button></a>
+                        <a href="{% url 'delete-review' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition w-32">Supprimer</button></a>
                     </div>
                 </div>
             {% elif post.post_type == 'ticket' %}
@@ -51,9 +51,9 @@
                         <p>{{ post.user }} a publié un ticket</p>
                     {% endif %}
                     {% include "review/_ticket.html" %}
-                    <div style="display:flex; gap:10px;">
-                        <a href="{% url 'edit-ticket' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Modifier</button></a>
-                        <a href="{% url 'delete-ticket' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Supprimer</button></a>
+                    <div style="width:100%; display:flex; justify-content:flex-end; gap:10px;">
+                        <a href="{% url 'edit-ticket' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition w-32">Modifier</button></a>
+                        <a href="{% url 'delete-ticket' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition w-32">Supprimer</button></a>
                     </div>
                 </div>
             {% endif %}
