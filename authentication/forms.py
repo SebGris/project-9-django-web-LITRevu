@@ -19,6 +19,7 @@ class CustomLoginForm(AuthenticationForm):
         })
     )
     password = forms.CharField(
+        label="Mot de passe",
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': 'Mot de passe',
