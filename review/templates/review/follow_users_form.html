@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2 class="text-center my-8">Suivre d'autres utilisateurs</h2>
+    <p class="text-center mb-4">Bienvenue {{ user.username }}, vous pouvez suivre ici d'autres utilisateurs pour voir leurs activités dans votre flux.</p>
     <form method="post">
         <div style="display: flex; align-items: flex-end; gap: 1rem;">
             {{ form.username }}
