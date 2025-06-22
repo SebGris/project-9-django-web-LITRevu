@@ -1,0 +1,22 @@
+{# Partial pour formulaire d'une review #}
+<div class="review" style="border:2px solid #333; padding:2rem; margin:2rem 0; background:#fafbfc;">
+<h3>Critique</h3>
+    <form method="post" enctype="multipart/form-data" style="width:100%;">
+        {% csrf_token %}
+         <div class="mb-4">
+            <label for="{{ edit_form.headline.id_for_label }}" class="block font-semibold mb-4">{{ edit_form.headline.label }}</label>
+            {{ edit_form.headline }}
+        </div>
+         <div class="mb-4">
+            <label for="{{ edit_form.rating.id_for_label }}" class="block font-semibold mb-4">{{ edit_form.rating.label }}</label>
+            {{ edit_form.rating }}
+        </div>
+         <div class="mb-4">
+            <label for="{{ edit_form.body.id_for_label }}" class="block font-semibold mb-4">{{ edit_form.body.label }}</label>
+            {{ edit_form.body }}
+        </div>
+        <div style="width:100%; display:flex; justify-content:flex-end;">
+            <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>
+        </div>
+    </form>
+</div>

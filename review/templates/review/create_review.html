@@ -4,7 +4,6 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ ticket_form.as_p }}
-        {{ review_form.as_p }}
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Envoyer</button>
+        {% include 'review/_form_review.html' with edit_form=review_form %}
     </form>
 {% endblock content %}
