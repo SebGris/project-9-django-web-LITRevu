@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
 from .models import UserFollows
 from django.http import HttpResponseForbidden
+from django.db.models import Value, CharField
 
 
 from . import forms, models
@@ -166,18 +167,13 @@ def flux(request):
     # Récupérer les utilisateurs suivis
     followed_users = models.UserFollows.objects.filter(user=request.user).values_list('followed_user', flat=True)
     users_to_show = list(followed_users) + [request.user.id]
-    tickets = models.Ticket.objects.filter(user__id__in=users_to_show)
-    reviews = models.Review.objects.filter(user__id__in=users_to_show)
+    tickets = models.Ticket.objects.filter(user__id__in=users_to_show).annotate(post_type=Value('ticket', output_field=CharField()))
+    reviews = models.Review.objects.filter(user__id__in=users_to_show).annotate(post_type=Value('review', output_field=CharField()))
     # Récupérer les tickets de l'utilisateur connecté
     user_tickets = models.Ticket.objects.filter(user=request.user)
     # Ajouter les reviews en réponse aux tickets de l'utilisateur connecté
-    reviews_on_user_tickets = models.Review.objects.filter(ticket__in=user_tickets)
+    reviews_on_user_tickets = models.Review.objects.filter(ticket__in=user_tickets).annotate(post_type=Value('review', output_field=CharField()))
     reviews = reviews | reviews_on_user_tickets  # Utilisez union si reviews est un QuerySet
-    # On ajoute un attribut post_type à chaque objet
-    for t in tickets:   # annotate
-        t.post_type = 'ticket'
-    for r in reviews:
-        r.post_type = 'review'
     flux = sorted(
         list(tickets) + list(reviews),
         key=lambda obj: obj.time_created,
@@ -188,13 +184,8 @@ def flux(request):
 
 @login_required
 def posts(request):
-    tickets = models.Ticket.objects.filter(user=request.user)
-    reviews = models.Review.objects.filter(user=request.user)
-    # On ajoute un attribut post_type à chaque objet
-    for t in tickets:
-        t.post_type = 'ticket'
-    for r in reviews:
-        r.post_type = 'review'
+    tickets = models.Ticket.objects.filter(user=request.user).annotate(post_type=Value('ticket', output_field=CharField()))
+    reviews = models.Review.objects.filter(user=request.user).annotate(post_type=Value('review', output_field=CharField()))
     posts = sorted(
         list(tickets) + list(reviews),
         key=lambda obj: getattr(obj, 'time_created', None),
