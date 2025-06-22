@@ -2,16 +2,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import (
-    LoginView, LogoutView)
+     LogoutView)
 from django.urls import include, path
 import authentication.views
 import review.views
+from authentication.views import MyLoginView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
-    path('', LoginView.as_view(
+    path('', MyLoginView.as_view(
         template_name='authentication/login.html',
         redirect_authenticated_user=True),
          name='login'),
