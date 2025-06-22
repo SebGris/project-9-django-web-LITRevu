@@ -1,10 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, permission_required
-from django.forms import formset_factory
-from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
 from .models import UserFollows
+from django.http import HttpResponseForbidden
 
 
 from . import forms, models
@@ -75,6 +74,13 @@ def create_review(request, ticket_id=None):
 @login_required
 def edit_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    if (
+        ticket.user != request.user
+        or not request.user.has_perm('review.change_own_ticket')
+    ):
+        return HttpResponseForbidden(
+            "Vous n'êtes pas autorisé à modifier ce ticket."
+        )
     edit_form = forms.TicketForm(instance=ticket)
     if request.method == 'POST':
         edit_form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
@@ -91,6 +97,13 @@ def edit_ticket(request, ticket_id):
 @login_required
 def edit_review(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
+    if (
+        review.user != request.user
+        or not request.user.has_perm('review.change_own_review')
+    ):
+        return HttpResponseForbidden(
+            "Vous n'êtes pas autorisé à modifier cette critique."
+        )
     edit_form = forms.ReviewForm(instance=review)
     if request.method == 'POST':
         edit_form = forms.ReviewForm(request.POST, instance=review)
@@ -107,6 +120,13 @@ def edit_review(request, review_id):
 @login_required
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    if (
+        ticket.user != request.user
+        or not request.user.has_perm('review.change_own_ticket')
+    ):
+        return HttpResponseForbidden(
+            "Vous n'êtes pas autorisé à supprimer ce ticket."
+        )
     if request.method == 'POST':
         ticket.delete()
         messages.success(request, "Ticket supprimé avec succès !")
@@ -117,6 +137,13 @@ def delete_ticket(request, ticket_id):
 @login_required
 def delete_review(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
+    if (
+        review.user != request.user
+        or not request.user.has_perm('review.change_own_review')
+    ):
+        return HttpResponseForbidden(
+            "Vous n'êtes pas autorisé à supprimer cette critique."
+        )
     if request.method == 'POST':
         review.delete()
         messages.success(request, "Critique supprimée avec succès !")

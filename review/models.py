@@ -28,6 +28,11 @@ class Ticket(models.Model):
             self.image.delete(save=False)
         super().delete(*args, **kwargs)
 
+    class Meta:
+        permissions = [
+            ("change_own_ticket", "Peut modifier son propre ticket"),
+        ]
+
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
@@ -39,6 +44,11 @@ class Review(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        permissions = [
+            ("change_own_review", "Peut modifier sa propre critique"),
+        ]
 
 
 class UserFollows(models.Model):
