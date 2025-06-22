@@ -8,7 +8,7 @@
             <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
         </a>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid-container">
         {% for post in flux %}
             {% if post.post_type == 'review' %}
                 <div class="border-2 border-blue-400 bg-blue-50 rounded-lg shadow p-6 mb-4">
@@ -29,12 +29,7 @@
             {% elif post.post_type == 'ticket' %}
                 <div class="bg-white rounded-lg shadow p-6 mb-4">
                     <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié un ticket{% else %}{{ post.user }} a publié un ticket{% endif %}</p>
-                    <p class="text-xs text-gray-400 mb-2">{{ post.time_created|date:"H:i, d F Y" }}</p>
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}" class="max-w-[150px] max-h-[150px] rounded mb-2" />
-                    {% endif %}
-                    <span class="font-bold text-lg text-gray-800">{{ post.title }}</span><br>
-                    <span>{{ post.description }}</span>
+                    {% include "review/_ticket.html" %}
                     <a href="{% url 'review-create-for-ticket' post.id %}">
                     <button type="button">Créer une critique</button>
                 </a>

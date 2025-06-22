@@ -50,11 +50,7 @@
                     {% else %}
                         <p>{{ post.user }} a publié un ticket</p>
                     {% endif %}
-                    <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}">
-                    {% endif %}
-                    <p>{{ post.title }}</p>
+                    {% include "review/_ticket.html" %}
                 </div>
             {% endif %}
         {% endfor %}
