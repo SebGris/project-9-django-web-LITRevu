@@ -47,9 +47,11 @@ pip install -r requirements.txt
 ### 📥 Installez Django et Pillow avec pip
 
 Assurez-vous que votre environnement virtuel est activé, puis installez Django si ce n'est pas déjà fait.
+**Le projet utilise des champs ImageField pour gérer les images. Django s’appuie sur la bibliothèque Pillow pour traiter et valider les fichiers image. Pillow est donc indispensable pour permettre l’upload et la gestion des images dans l’application.**
 
 ```bash
 pip install django
+pip install Pillow
 ```
 
 ### ⚙️ Créer le fichier requirements.txt
