@@ -18,6 +18,10 @@
         }
     </style>
     <div class="grid-container">
+        <h2 class="text-center my-8">Vos posts</h2>
+        {% if posts|length == 0 %}
+            <p class="text-center">Aucune publication trouvée.</p>
+        {% endif %} 
         {% for post in posts %}
             {% if post.post_type == 'review' %}
                 <div class="post" style="border:2px solid #4a90e2; background:#f7faff;">
