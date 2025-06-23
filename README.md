@@ -95,12 +95,6 @@ python manage.py tailwind start
 👉 http://127.0.0.1:8000/admin/  
 Connectez-vous avec le superutilisateur créé précédemment.
 
-### 10. (Optionnel) Exécuter les tests unitaires
-
-```bash
-python manage.py test
-```
-
 ---
 
 ## 📄 Aide
