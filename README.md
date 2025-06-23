@@ -47,11 +47,9 @@ pip install -r requirements.txt
 ### 📥 Installez Django et Pillow avec pip
 
 Assurez-vous que votre environnement virtuel est activé, puis installez Django si ce n'est pas déjà fait.
-Nous utilisons un modèle utilisateur personnalisé ayant une photo de profil un ImageField donc Django a besoin du package Pillow pour utiliser ImageField. Pillow est une bibliothèque Python de traitement d’images.
 
 ```bash
 pip install django
-pip install Pillow
 ```
 
 ### ⚙️ Créer le fichier requirements.txt
