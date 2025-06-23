@@ -59,13 +59,29 @@ class ReviewForm(forms.ModelForm):
 
 
 class FollowUsersForm(forms.Form):
-    username = forms.CharField(
-        label="",
-        max_length=150,
-        widget=forms.TextInput(attrs={
+    username = forms.ChoiceField(
+        label="Nom d'utilisateur",
+        choices=[],
+        widget=forms.Select(attrs={
             'class': 'form-control',
-            'placeholder': "Nom d'utilisateur",
-            'autocomplete': 'off',
             'style': 'border:2px solid #333;'
         })
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        User = get_user_model()
+        # Exclure l'utilisateur courant et ceux déjà suivis
+        if 'user' in kwargs:
+            current_user = kwargs['user']
+        else:
+            current_user = None
+        users_qs = User.objects.all()
+        if current_user:
+            users_qs = users_qs.exclude(pk=current_user.pk)
+            from .models import UserFollows
+            already_followed = UserFollows.objects.filter(user=current_user).values_list('followed_user', flat=True)
+            users_qs = users_qs.exclude(pk__in=already_followed)
+        self.fields['username'].choices = [('', '--- Sélectionnez un utilisateur ---')] + [
+            (user.username, user.username) for user in users_qs
+        ]

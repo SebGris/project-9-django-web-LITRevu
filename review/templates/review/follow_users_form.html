@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
     <p class="mb-4">Bienvenue <em>{{ user.username }}</em>, vous pouvez suivre ici d'autres utilisateurs pour voir leurs activités dans votre flux.</p>
-    <h2 class="text-center my-8">Suivre d'autres utilisateurs</h2>
+    <h3 class="text-center my-8">Suivre d'autres utilisateurs</h3>
     <form method="post">
         <div style="display: flex; align-items: flex-end; gap: 1rem;">
+            <label for="{{ form.username.id_for_label }}">{{ form.username.label }} : </label>
             {{ form.username }}
             <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>
         </div>
@@ -12,30 +13,28 @@
     {% if message %}
         <div style="color: red;">{{ message }}</div>
     {% endif %}
-    <h2 class="text-center my-8">Abonnements</h2>
-    <table style="width:100%; border-collapse:collapse; border:2px solid #333;">
+
+    <h3 class="text-center my-8">Abonnements</h3>
+    <div class="flex flex-col gap-2 mb-8">
         {% for follow in following %}
-            <tr>
-                <td style="border:1px solid #333; padding:8px; width:100%;">{{ follow.followed_user }}</td>
-                <td style="border:1px solid #333; padding:8px; white-space:nowrap;">
-                    <form method="post" action="{% url 'unfollow-user' follow.followed_user.id %}" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Désabonner</button>
-                    </form>
-                </td>
-            </tr>
+            <div class="flex items-center justify-between border border-gray-400 rounded px-4 py-2 bg-gray-50">
+                <span>{{ follow.followed_user }}</span>
+                <form method="post" action="{% url 'unfollow-user' follow.followed_user.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Désabonner</button>
+                </form>
+            </div>
         {% empty %}
-            <tr><td colspan="2" style="border:1px solid #333; padding:8px;">Vous ne suivez personne.</td></tr>
+            <div class="border border-gray-400 rounded px-4 py-2 bg-gray-50">Vous ne suivez personne.</div>
         {% endfor %}
-    </table>
-    <h2 class="text-center my-8">Abonnés</h2>
-    <table style="width:100%; border-collapse:collapse; border:2px solid #333;">
+    </div>
+
+    <h3 class="text-center my-8">Abonnés</h3>
+    <div class="flex flex-col gap-2 mb-8">
         {% for follow in followers %}
-            <tr>
-                <td style="border:1px solid #333; padding:8px;">{{ follow.user }}</td>
-            </tr>
+            <div class="border border-gray-400 rounded px-4 py-2 bg-gray-50">{{ follow.user }}</div>
         {% empty %}
-            <tr><td style="border:1px solid #333; padding:8px;">Aucun abonné.</td></tr>
+            <div class="border border-gray-400 rounded px-4 py-2 bg-gray-50">Aucun abonné.</div>
         {% endfor %}
-    </table>
+    </div>
 {% endblock content %}

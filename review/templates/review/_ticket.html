@@ -1,9 +1,9 @@
 {# Partial pour l'affichage d'un ticket #}
 <div class="ticket">
     <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
-    <h4>{{ post.title }}</h4>
+    <h3>{{ post.title }}</h3>
     {% if post.image %}
-        <img src="{{ post.image.url }}" class="max-w-[150px] max-h-[150px] rounded mb-2" />
+        <img src="{{ post.image.url }}" alt="Image du ticket {{ post.title }}" class="max-w-[150px] max-h-[150px] rounded mb-2" />
     {% endif %}
     <p>{{ post.description }}</p>
 </div>

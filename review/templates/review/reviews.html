@@ -18,7 +18,7 @@
                     <span>{{ post.ticket.title }}</span><br>
                     <span>{{ post.ticket.description }}</span>
                     {% if post.ticket.image %}
-                        <img src="{{ post.ticket.image.url }}" style="max-width:100px;max-height:100px;">
+                        <img src="{{ post.ticket.image.url }}" alt="Image du ticket {{ post.ticket.title }}" style="max-width:100px;max-height:100px;">
                     {% endif %}
                 </div>
                 <div style="display:flex; gap:10px;">
