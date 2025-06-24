@@ -52,29 +52,6 @@ Installez les dépendances Python nécessaires en utilisant pip :
 pip install -r requirements.txt
 ```
 
-### 5. Configurer les variables d'environnement
-
-Créez un fichier .env à la racine de votre projet et ajoutez les variables d'environnement nécessaires. Voici un exemple :
-```bash
-SECRET_KEY=votre_cle_secrete
-DEBUG=True
-```
-
-### 6. Appliquer les migrations
-
-Appliquez les migrations pour configurer votre base de données :
-```bash
-python manage.py migrate
-```
-
-### 7. Créer un superutilisateur
-
-Créez un superutilisateur pour accéder à l'interface d'administration de Django :
-```bash
-python manage.py createsuperuser
-```
-Suivez les instructions pour configurer le nom d'utilisateur, l'adresse e-mail et le mot de passe.
-
 ### 8. Installer les dépendances Node.js
 
 Assurez-vous d'avoir Node.js installé, puis installez les dépendances nécessaires pour Tailwind CSS.
