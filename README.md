@@ -1,3 +1,5 @@
+https://django-tailwind.readthedocs.io/en/latest/settings.html
+
 # Projet Django pour LITRevu
 
 Bienvenue dans **Mon Projet Django pour LITRevu** !  
