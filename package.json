@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build": "tailwindcss -i ./static/src/input.css -o ./static/css/styles.css --minify",
+    "watch": "tailwindcss -i ./static/src/input.css -o ./static/css/styles.css --watch"
+  },
   "devDependencies": {
     "cross-env": "^7.0.3"
   }
