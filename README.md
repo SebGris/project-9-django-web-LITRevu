@@ -1,6 +1,4 @@
-# Mon Projet Django pour LITRevu
-
-## 🚀 Introduction
+# Projet Django pour LITRevu
 
 Bienvenue dans **Mon Projet Django pour LITRevu** !  
 Ce guide vous explique comment configurer et exécuter ce projet Django en local sur votre machine, de l’installation des dépendances à l’accès à l’application.
@@ -11,14 +9,15 @@ Ce guide vous explique comment configurer et exécuter ce projet Django en local
 
 Avant de commencer, assurez-vous d’avoir installé :
 
-- [Python 3.8+](https://www.python.org/downloads/)
-- [pip](https://pip.pypa.io/en/stable/installation/)
-- [Git](https://git-scm.com/)
+- [Python](https://www.python.org/downloads/) (version 3.8 ou supérieure)
+- [pip](https://pip.pypa.io/en/stable/installation/) (généralement inclus avec Python)
+- [Git](https://git-scm.com/downloads)
+- [Node.js](https://nodejs.org/) (pour l'utilisation de Tailwind CSS)
 - Un éditeur de code (ex : VS Code)
 
 ---
 
-## 📥 Installation et configuration locale
+## 📥 Configuration de l'environnement local
 
 ### 1. Cloner le dépôt
 
@@ -27,77 +26,80 @@ git clone https://github.com/SebGris/project-9-django-web-LITRevu.git
 cd project-9-django-web-LITRevu
 ```
 
-### 2. Créer et activer un environnement virtuel
-
-Sous Windows :
+### 2. Créer un environnement virtuel
+Il est recommandé d'utiliser un environnement virtuel pour isoler les dépendances de votre projet.
 ```bash
-python -m venv env
-env\Scripts\activate
-```
-Sous macOS/Linux :
-```bash
-python3 -m venv env
-source env/bin/activate
+python -m venv venv
 ```
 
-### 3. Installer les dépendances
+### 3. Activer l'environnement virtuel
 
+Sur Windows :
+```bash
+venv\Scripts\activate
+```
+Sur macOS et Linux :
+```bash
+source venv/bin/activate
+```
+
+### 4. Installer les dépendances
+
+Installez les dépendances Python nécessaires en utilisant pip :
 ```bash
 pip install -r requirements.txt
 ```
 
-Si le fichier `requirements.txt` n’existe pas, créez-le avec :
+### 5. Configurer les variables d'environnement
+
+Créez un fichier .env à la racine de votre projet et ajoutez les variables d'environnement nécessaires. Voici un exemple :
 ```bash
-pip freeze > requirements.txt
+SECRET_KEY=votre_cle_secrete
+DEBUG=True
 ```
 
-### 4. Installer Django et Pillow (si besoin)
+### 6. Appliquer les migrations
 
+Appliquez les migrations pour configurer votre base de données :
 ```bash
-pip install django
-pip install Pillow
-```
-> **Remarque :** Pillow est indispensable pour la gestion des images avec Django (`ImageField`).
-
-### 5. Appliquer les migrations
-
-Créez la base de données et les tables nécessaires :
-```bash
-python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 6. Créer un superutilisateur
+### 7. Créer un superutilisateur
 
-Pour accéder à l’interface d’administration Django :
+Créez un superutilisateur pour accéder à l'interface d'administration de Django :
 ```bash
 python manage.py createsuperuser
 ```
-Suivez les instructions pour définir un nom d’utilisateur, une adresse email et un mot de passe.
+Suivez les instructions pour configurer le nom d'utilisateur, l'adresse e-mail et le mot de passe.
 
-### 7. Lancer le serveur de développement
+### 8. Installer les dépendances Node.js
 
+Assurez-vous d'avoir Node.js installé, puis installez les dépendances nécessaires pour Tailwind CSS.
+```bash
+npm install
+```
+
+### 9. IConstruire les fichiers statiques avec Tailwind CSS
+
+Construisez les fichiers statiques en utilisant Tailwind CSS :
+```bash
+npm run build
+```
+
+### 10. Lancer le serveur de développement
+
+Enfin, lancez le serveur de développement Django :
 ```bash
 python manage.py runserver
 ```
-L’application sera alors disponible à l’adresse suivante :  
-👉 http://127.0.0.1:8000/
-
-### 8. (Optionnel) Démarrer le serveur Tailwind CSS
-
-Si vous utilisez Tailwind CSS pour le style :
-```bash
-python manage.py tailwind start
-```
-
-### 9. Accès à l’administration Django
-
-👉 http://127.0.0.1:8000/admin/  
-Connectez-vous avec le superutilisateur créé précédemment.
-
----
+Ouvrez votre navigateur et accédez à http://127.0.0.1:8000/ pour voir votre application en action.
 
 ## 📄 Aide
+
+Accès à l’administration Django : 
+👉 http://127.0.0.1:8000/admin/  
+Connectez-vous avec le superutilisateur créé précédemment.
 
 Si vous rencontrez des problèmes, vérifiez que :
 - l’environnement virtuel est bien activé
