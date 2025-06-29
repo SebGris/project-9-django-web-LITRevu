@@ -14,15 +14,15 @@ class StarRatingWidget(forms.Select):
     def render(self, name, value, attrs=None, renderer=None):
         if attrs is None:
             attrs = {}
-        
+
         # Assurer que value est un entier valide
         current_value = int(value) if value and str(value).isdigit() else 0
-        
+
         # Générer un ID unique pour éviter les conflits
         import uuid
         unique_id = str(uuid.uuid4())[:8]
         field_id = f"rating_{name}_{unique_id}"
-        
+
         # Créer l'interface d'étoiles directement
         html = f'''
         <div class="star-rating-widget" id="{field_id}_container">
@@ -34,13 +34,13 @@ class StarRatingWidget(forms.Select):
                 ])}
             </div>
         </div>
-        
+
         <script>
         (function() {{
             const container = document.getElementById('{field_id}_container');
             const hiddenInput = document.getElementById('{field_id}');
             const stars = container.querySelectorAll('.star');
-            
+
             function updateStars(rating) {{
                 stars.forEach((star, index) => {{
                     const starValue = index + 1;
@@ -52,16 +52,16 @@ class StarRatingWidget(forms.Select):
                 }});
                 hiddenInput.value = rating;
             }}
-            
+
             // Initialiser avec la valeur actuelle
             updateStars({current_value});
-            
+
             stars.forEach((star) => {{
                 star.addEventListener('click', function() {{
                     const rating = parseInt(this.dataset.rating);
                     updateStars(rating);
                 }});
-                
+
                 star.addEventListener('mouseenter', function() {{
                     const rating = parseInt(this.dataset.rating);
                     stars.forEach((s, index) => {{
@@ -74,7 +74,7 @@ class StarRatingWidget(forms.Select):
                     }});
                 }});
             }});
-            
+
             container.addEventListener('mouseleave', function() {{
                 const currentRating = parseInt(hiddenInput.value) || 0;
                 updateStars(currentRating);
@@ -115,12 +115,12 @@ class SimpleStarRatingWidget(forms.RadioSelect):
         <script>
         document.addEventListener('DOMContentLoaded', function() {
             const radioGroups = document.querySelectorAll('.star-radio-group');
-            
+
             radioGroups.forEach(group => {
                 const labels = group.querySelectorAll('.star-label');
                 const inputs = group.querySelectorAll('input[type="radio"]');
                 const stars = group.querySelectorAll('.star-radio');
-                
+
                 labels.forEach((label, index) => {
                     label.addEventListener('click', function() {
                         // Mettre à jour tous les étoiles

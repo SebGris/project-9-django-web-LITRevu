@@ -12,6 +12,9 @@ class Ticket(models.Model):
     image = models.ImageField(blank=True, null=True)
     created = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return f"{self.title} - {self.user.username}"
+
     def save(self, *args, **kwargs):
         if self.pk:
             old_ticket = Ticket.objects.filter(pk=self.pk).first()
@@ -42,6 +45,9 @@ class Review(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.headline} - {self.rating}/5 - {self.user.username}"
 
     def get_stars_display(self):
         """Retourne l'affichage en étoiles du rating"""
@@ -77,3 +83,6 @@ class UserFollows(models.Model):
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user', )
+
+    def __str__(self):
+        return f"{self.user.username} suit {self.followed_user.username}"
