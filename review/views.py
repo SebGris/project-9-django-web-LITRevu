@@ -242,3 +242,12 @@ def follow_users(request):
             'message': message
         }
     )
+
+
+@login_required
+def stars_demo(request):
+    """Vue de démonstration pour tester l'affichage des étoiles"""
+    reviews = models.Review.objects.select_related('user', 'ticket')[:5]
+    return render(request, 'review/stars_demo.html', {
+        'reviews': reviews
+    })

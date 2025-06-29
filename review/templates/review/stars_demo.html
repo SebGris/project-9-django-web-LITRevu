@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load review_extras %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'review/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Exemples d'affichage des étoiles</h1>
+    
+    <div class="grid gap-6">
+        <!-- Méthode 1: Avec le filtre stars -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Méthode 1: Filtre simple</h2>
+            <p>Rating de 4: {{ 4|stars }}</p>
+            <p>Rating de 2: {{ 2|stars }}</p>
+        </div>
+        
+        <!-- Méthode 2: Avec le filtre stars_html -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Méthode 2: Filtre HTML</h2>
+            <p>Rating de 5: {{ 5|stars_html|safe }}</p>
+            <p>Rating de 3: {{ 3|stars_html|safe }}</p>
+        </div>
+        
+        <!-- Méthode 3: Avec l'inclusion tag -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Méthode 3: Template tag d'inclusion</h2>
+            <p>Rating de 4: {% display_stars 4 %}</p>
+            <p>Rating de 1: {% display_stars 1 %}</p>
+        </div>
+        
+        <!-- Méthode 4: Avec le simple tag -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Méthode 4: Simple tag</h2>
+            <p>Rating de 5: {% rating_stars 5 %}</p>
+            <p>Rating de 2: {% rating_stars 2 %}</p>
+        </div>
+        
+        <!-- Exemple dans une boucle avec des reviews -->
+        {% if reviews %}
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Exemples avec de vraies reviews</h2>
+            {% for review in reviews %}
+            <div class="border-b pb-4 mb-4">
+                <h3 class="font-bold">{{ review.headline }}</h3>
+                {% display_stars review.rating %}
+                <p class="text-gray-600 mt-2">{{ review.body|truncatewords:20 }}</p>
+                <small class="text-gray-500">Par {{ review.user.username }}</small>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Exemple d'interactivité JavaScript pour les étoiles
+document.addEventListener('DOMContentLoaded', function() {
+    // Animation au survol des étoiles
+    const stars = document.querySelectorAll('.star');
+    stars.forEach(star => {
+        star.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.2)';
+            this.style.transition = 'transform 0.2s ease';
+        });
+        
+        star.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+});
+</script>
+{% endblock %}

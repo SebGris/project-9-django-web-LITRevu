@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load review_extras %}
 {% block content %}
     <style>
         .post {
@@ -26,13 +27,15 @@
             {% if post.post_type == 'review' %}
                 <div class="post" style="border:2px solid #4a90e2; background:#f7faff;">
                     {% if post.user == user %}
-                        <p>Vous avez publié une critique</p>
+                        <p>Vous avez publié une critique {{ post.user }}</p>
                     {% else %}
                         <p>{{ post.user }} a publié une critique</p>
                     {% endif %}
                     <p>{{ post.created|date:"H:i, d F Y" }}</p>
                     <p><b>{{ post.headline }}</b></p>
-                    <p>Note : {{ post.rating }}/5</p>
+                    <div class="rating-display mb-2">
+                        {% display_stars post.rating %}
+                    </div>
                     <p>{{ post.body }}</p>
                     <div style="border:1px solid #aaa; background:#fff; margin:16px 0; padding:10px;">
                         <span>Ticket - {% if post.ticket.user == user %}Vous{% else %}{{ post.ticket.user }}{% endif %}</span><br>

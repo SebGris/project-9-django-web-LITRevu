@@ -1,5 +1,13 @@
+{% load review_extras %}
+
 {# Partial pour l'affichage d'une review #}
 <div class="review">
     <h3>{{ review.headline }}</h3>
+    <div class="review-rating">
+        {% display_stars review.rating %}
+    </div>
     <p>{{ review.body }}</p>
+    <small class="review-meta">
+        Par {{ review.user.username }} le {{ review.created|date:"d M Y à H:i" }}
+    </small>
 </div>

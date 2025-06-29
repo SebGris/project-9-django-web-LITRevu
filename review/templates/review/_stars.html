@@ -1,0 +1,10 @@
+<div class="rating-display">
+    {% for i in "12345" %}
+        {% if forloop.counter <= rating %}
+            <span class="star filled">★</span>
+        {% else %}
+            <span class="star empty">☆</span>
+        {% endif %}
+    {% endfor %}
+    <span class="rating-text">({{ rating }}/5)</span>
+</div>

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 
 from . import models
+from .widgets import StarRatingWidget, SimpleStarRatingWidget
 
 REVIEW_CHOICES = [
     ('1', '1'),
@@ -53,7 +54,7 @@ class ReviewForm(forms.ModelForm):
             'body': 'Commentaire',
         }
         widgets = {
-            'rating': forms.RadioSelect(choices=REVIEW_CHOICES),
+            'rating': StarRatingWidget(),
             'headline': forms.TextInput(
                 attrs={'style': 'border:2px solid #333; width:100%;'}
             ),

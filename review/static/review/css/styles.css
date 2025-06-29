@@ -1,0 +1,114 @@
+/* Styles pour les étoiles de rating */
+.rating-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.rating-stars {
+    display: inline-flex;
+    gap: 2px;
+}
+
+.star {
+    font-size: 1.2em;
+    cursor: default;
+    transition: color 0.2s ease;
+}
+
+.star.filled,
+.star.star-filled {
+    color: #ffd700; /* Or */
+    text-shadow: 0 0 2px rgba(255, 215, 0, 0.5);
+}
+
+.star.empty,
+.star.star-empty {
+    color: #ddd; /* Gris clair */
+}
+
+.rating-text {
+    margin-left: 8px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Style pour un input rating interactif */
+.rating-input {
+    display: inline-flex;
+    gap: 2px;
+}
+
+.rating-input .star {
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: all 0.2s ease;
+}
+
+.rating-input .star:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}
+
+.rating-input .star.empty:hover {
+    color: #ffed4e;
+}
+
+/* Styles pour les radio buttons en étoiles */
+.star-radio-group {
+    display: inline-flex;
+    gap: 2px;
+}
+
+.star-label {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.star-radio {
+    font-size: 1.5em;
+    transition: all 0.2s ease;
+    color: #ddd;
+}
+
+.star-radio.filled {
+    color: #ffd700;
+    text-shadow: 0 0 2px rgba(255, 215, 0, 0.5);
+}
+
+.star-radio:hover {
+    transform: scale(1.1);
+    color: #ffed4e !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .star {
+        font-size: 1em;
+    }
+    
+    .rating-input .star {
+        font-size: 1.3em;
+    }
+    
+    .star-radio {
+        font-size: 1.3em;
+    }
+}
+
+/* Animation au survol pour les reviews */
+.review-card .rating-display:hover .star.filled {
+    animation: sparkle 0.5s ease-in-out;
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Styles pour masquer le select original du widget */
+.rating-select {
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+}

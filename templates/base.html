@@ -3,6 +3,8 @@
     <head>
         <title>LITRevu</title>
         {% tailwind_css %}
+        <link rel="stylesheet" href="{% static 'review/css/styles.css' %}">
+        {% block extra_css %}{% endblock %}
     </head>
     <body class="min-h-screen flex flex-col">
         <nav class="w-full bg-violet-300 text-blue-600 shadow-md py-4 px-8 flex items-center justify-between">
@@ -31,5 +33,6 @@
             {% endif %}
             {% block content %}{% endblock content %}
         </main>
+        {% block extra_js %}{% endblock %}
     </body>
 </html>

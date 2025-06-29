@@ -48,6 +48,22 @@ class Review(models.Model):
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
+    def get_stars_display(self):
+        """Retourne l'affichage en étoiles du rating"""
+        full_stars = "★" * self.rating
+        empty_stars = "☆" * (5 - self.rating)
+        return full_stars + empty_stars
+
+    def get_stars_html(self):
+        """Retourne l'HTML pour afficher les étoiles"""
+        stars_html = ""
+        for i in range(1, 6):
+            if i <= self.rating:
+                stars_html += '<span class="star filled">★</span>'
+            else:
+                stars_html += '<span class="star empty">☆</span>'
+        return stars_html
+
     class Meta:
         permissions = [
             ("change_own_review", "Peut modifier sa propre critique"),

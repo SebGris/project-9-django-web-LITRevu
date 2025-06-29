@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load review_extras %}
 {% block content %}
     <div class="flex gap-4 items-center mb-8 w-full px-2">
         <a href="{% url 'ticket-create' %}" class="flex-1 mx-6">
@@ -12,10 +13,12 @@
         {% for post in flux %}
             {% if post.post_type == 'review' %}
                 <div class="border-2 border-blue-400 bg-blue-50 rounded-lg shadow p-6 mb-4">
-                    <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié une critique{% else %}{{ post.user }} a publié une critique{% endif %}</p>
+                    <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié une critique {{ post.user }} {% else %}{{ post.user }} a publié une critique{% endif %}</p>
                     <p class="text-xs text-gray-400 mb-2">{{ post.created|date:"H:i, d F Y" }}</p>
                     <h3 class="font-bold text-lg text-blue-900">{{ post.headline }}</h3>
-                    <p class="text-blue-700">Note : {{ post.rating }}/5</p>
+                    <div class="rating-display mb-2">
+                        {% display_stars post.rating %}
+                    </div>
                     <p class="mb-2">{{ post.body }}</p>
                     <div class="border border-gray-300 bg-white rounded p-4 my-4">
                         <span class="font-semibold">Ticket - {% if post.ticket.user == user %}Vous{% else %}{{ post.ticket.user }}{% endif %}</span><br>
