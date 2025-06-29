@@ -9,7 +9,7 @@
                 {% else %}
                     <p>{{ post.user }} a publié une critique</p>
                 {% endif %}
-                <p>{{ post.time_created|date:"H:i, d F Y" }}</p>
+                <p>{{ post.created|date:"H:i, d F Y" }}</p>
                 <p><b>{{ post.headline }}</b></p>
                 <p>Note : {{ post.rating }}/5</p>
                 <p>{{ post.body }}</p>

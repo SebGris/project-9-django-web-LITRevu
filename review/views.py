@@ -176,7 +176,7 @@ def flux(request):
     reviews = reviews | reviews_on_user_tickets  # Utilisez union si reviews est un QuerySet
     flux = sorted(
         list(tickets) + list(reviews),
-        key=lambda obj: obj.time_created,
+        key=lambda obj: obj.created,
         reverse=True
     )
     return render(request, 'review/flux.html', context={'flux': flux}, )
@@ -188,7 +188,7 @@ def posts(request):
     reviews = models.Review.objects.filter(user=request.user).annotate(post_type=Value('review', output_field=CharField()))
     posts = sorted(
         list(tickets) + list(reviews),
-        key=lambda obj: getattr(obj, 'time_created', None),
+        key=lambda obj: getattr(obj, 'created', None),
         reverse=True
     )
     return render(request, 'review/posts.html', context={'posts': posts}, )
