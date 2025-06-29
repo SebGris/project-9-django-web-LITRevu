@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 
 from . import models
 from .models import UserFollows
-from .widgets import StarRatingWidget
 
 REVIEW_CHOICES = [
     ('1', '1'),
@@ -55,7 +54,9 @@ class ReviewForm(forms.ModelForm):
             'body': 'Commentaire',
         }
         widgets = {
-            'rating': StarRatingWidget(),
+            'rating': forms.Select(
+                choices=[(i, f'{i} étoiles') for i in range(1, 6)]
+            ),
             'headline': forms.TextInput(
                 attrs={'style': 'border:2px solid #333; width:100%;'}
             ),

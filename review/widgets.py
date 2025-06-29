@@ -14,48 +14,59 @@ class StarRatingWidget(forms.Select):
     def render(self, name, value, attrs=None, renderer=None):
         if attrs is None:
             attrs = {}
-        attrs['class'] = attrs.get('class', '') + ' rating-select'
-        attrs['style'] = 'display: none;'  # Cacher le select original
-
-        select_html = super().render(name, value, attrs, renderer)
-
-        # Créer l'interface d'étoiles
-        stars_html = f'''
-        <div class="rating-input" data-target="id_{name}">
-            <input type="hidden" id="id_{name}" name="{name}" value="{value or 0}">
-            {''.join([
-                f'<span class="star {"filled" if i <= int(value or 0) else "empty"}" data-value="{i}">★</span>'
-                for i in range(1, 6)
-            ])}
+        
+        # Assurer que value est un entier valide
+        current_value = int(value) if value and str(value).isdigit() else 0
+        
+        # Générer un ID unique pour éviter les conflits
+        import uuid
+        unique_id = str(uuid.uuid4())[:8]
+        field_id = f"rating_{name}_{unique_id}"
+        
+        # Créer l'interface d'étoiles directement
+        html = f'''
+        <div class="star-rating-widget" id="{field_id}_container">
+            <input type="hidden" id="{field_id}" name="{name}" value="{current_value}">
+            <div class="stars-display">
+                {''.join([
+                    f'<span class="star" data-rating="{i}" style="color: {"#ffd700" if i <= current_value else "#ddd"}; cursor: pointer; font-size: 24px;">★</span>'
+                    for i in range(1, 6)
+                ])}
+            </div>
         </div>
+        
         <script>
-        document.addEventListener('DOMContentLoaded', function() {{
-            const ratingContainer = document.querySelector('.rating-input[data-target="id_{name}"]');
-            const hiddenInput = document.getElementById('id_{name}');
-            const stars = ratingContainer.querySelectorAll('.star');
+        (function() {{
+            const container = document.getElementById('{field_id}_container');
+            const hiddenInput = document.getElementById('{field_id}');
+            const stars = container.querySelectorAll('.star');
             
-            stars.forEach((star, index) => {{
+            function updateStars(rating) {{
+                stars.forEach((star, index) => {{
+                    const starValue = index + 1;
+                    if (starValue <= rating) {{
+                        star.style.color = '#ffd700';
+                    }} else {{
+                        star.style.color = '#ddd';
+                    }}
+                }});
+                hiddenInput.value = rating;
+            }}
+            
+            // Initialiser avec la valeur actuelle
+            updateStars({current_value});
+            
+            stars.forEach((star) => {{
                 star.addEventListener('click', function() {{
-                    const rating = parseInt(this.dataset.value);
-                    hiddenInput.value = rating;
-                    
-                    // Mettre à jour l'affichage
-                    stars.forEach((s, i) => {{
-                        if (i < rating) {{
-                            s.classList.remove('empty');
-                            s.classList.add('filled');
-                        }} else {{
-                            s.classList.remove('filled');
-                            s.classList.add('empty');
-                        }}
-                    }});
+                    const rating = parseInt(this.dataset.rating);
+                    updateStars(rating);
                 }});
                 
-                // Effet de survol
                 star.addEventListener('mouseenter', function() {{
-                    const rating = parseInt(this.dataset.value);
-                    stars.forEach((s, i) => {{
-                        if (i < rating) {{
+                    const rating = parseInt(this.dataset.rating);
+                    stars.forEach((s, index) => {{
+                        const starValue = index + 1;
+                        if (starValue <= rating) {{
                             s.style.color = '#ffed4e';
                         }} else {{
                             s.style.color = '#ddd';
@@ -64,22 +75,15 @@ class StarRatingWidget(forms.Select):
                 }});
             }});
             
-            // Restaurer l'affichage au départ de la souris
-            ratingContainer.addEventListener('mouseleave', function() {{
+            container.addEventListener('mouseleave', function() {{
                 const currentRating = parseInt(hiddenInput.value) || 0;
-                stars.forEach((s, i) => {{
-                    if (i < currentRating) {{
-                        s.style.color = '#ffd700';
-                    }} else {{
-                        s.style.color = '#ddd';
-                    }}
-                }});
+                updateStars(currentRating);
             }});
-        }});
+        }})();
         </script>
         '''
 
-        return mark_safe(select_html + stars_html)
+        return mark_safe(html)
 
 
 class SimpleStarRatingWidget(forms.RadioSelect):
