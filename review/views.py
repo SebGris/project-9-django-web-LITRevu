@@ -85,7 +85,7 @@ def edit_ticket(request, ticket_id):
         if edit_form.is_valid():
             edit_form.save()
             messages.success(request, "Ticket modifié avec succès !")
-            return redirect('flux')
+            return redirect('posts')
     context = {
         'edit_form': edit_form,
     }
@@ -106,7 +106,7 @@ def edit_review(request, review_id):
         if edit_form.is_valid():
             edit_form.save()
             messages.success(request, "Critique modifiée avec succès !")
-            return redirect('flux')
+            return redirect('posts')
     context = {
         'edit_form': edit_form,
     }
@@ -124,7 +124,7 @@ def delete_ticket(request, ticket_id):
     if request.method == 'POST':
         ticket.delete()
         messages.success(request, "Ticket supprimé avec succès !")
-        return redirect('flux')
+        return redirect('posts')
     return render(request, 'review/delete_ticket.html')
 
 
@@ -139,7 +139,7 @@ def delete_review(request, review_id):
     if request.method == 'POST':
         review.delete()
         messages.success(request, "Critique supprimée avec succès !")
-        return redirect('flux')
+        return redirect('posts')
     return render(request, 'review/delete_review.html')
 
 
