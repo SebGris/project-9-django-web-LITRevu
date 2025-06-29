@@ -10,7 +10,7 @@ def stars(rating):
     """
     if rating is None:
         return ""
-    
+
     rating = int(rating)
     full_stars = "★" * rating
     empty_stars = "☆" * (5 - rating)
@@ -24,16 +24,16 @@ def stars_html(rating):
     """
     if rating is None:
         return ""
-    
+
     rating = int(rating)
     stars_html = ""
-    
+
     for i in range(1, 6):
         if i <= rating:
             stars_html += '<span class="star filled">★</span>'
         else:
             stars_html += '<span class="star empty">☆</span>'
-    
+
     return stars_html
 
 
@@ -52,9 +52,9 @@ def rating_stars(rating, max_rating=5):
     """
     if rating is None:
         rating = 0
-    
+
     rating = min(max(int(rating), 0), max_rating)
-    
+
     html = '<div class="rating-stars">'
     for i in range(1, max_rating + 1):
         if i <= rating:
@@ -64,5 +64,5 @@ def rating_stars(rating, max_rating=5):
             html += (f'<span class="star star-empty" '
                      f'data-rating="{i}">☆</span>')
     html += '</div>'
-    
+
     return html

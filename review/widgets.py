@@ -10,15 +10,15 @@ class StarRatingWidget(forms.Select):
         choices = [(i, f'{i} étoile{"s" if i > 1 else ""}')
                    for i in range(1, 6)]
         super().__init__(attrs, choices)
-    
+
     def render(self, name, value, attrs=None, renderer=None):
         if attrs is None:
             attrs = {}
         attrs['class'] = attrs.get('class', '') + ' rating-select'
         attrs['style'] = 'display: none;'  # Cacher le select original
-        
+
         select_html = super().render(name, value, attrs, renderer)
-        
+
         # Créer l'interface d'étoiles
         stars_html = f'''
         <div class="rating-input" data-target="id_{name}">
@@ -78,7 +78,7 @@ class StarRatingWidget(forms.Select):
         }});
         </script>
         '''
-        
+
         return mark_safe(select_html + stars_html)
 
 
@@ -89,13 +89,13 @@ class SimpleStarRatingWidget(forms.RadioSelect):
     def __init__(self, attrs=None):
         choices = [(i, f'{i}') for i in range(1, 6)]
         super().__init__(attrs, choices)
-    
+
     def render(self, name, value, attrs=None, renderer=None):
         if attrs is None:
             attrs = {}
-        
+
         html = f'<div class="star-radio-group" data-name="{name}">'
-        
+
         for i in range(1, 6):
             checked = 'checked' if str(value) == str(i) else ''
             html += f'''
@@ -104,9 +104,9 @@ class SimpleStarRatingWidget(forms.RadioSelect):
                 <span class="star-radio {'filled' if str(value) == str(i) else 'empty'}">★</span>
             </label>
             '''
-        
+
         html += '</div>'
-        
+
         html += '''
         <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -135,5 +135,5 @@ class SimpleStarRatingWidget(forms.RadioSelect):
         });
         </script>
         '''
-        
+
         return mark_safe(html)

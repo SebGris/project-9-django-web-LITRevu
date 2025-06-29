@@ -1,14 +1,13 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
-from .models import UserFollows
+from django.contrib.auth.decorators import login_required
+from django.db.models import CharField, Value
 from django.http import HttpResponseForbidden
-from django.db.models import Value, CharField
+from django.shortcuts import get_object_or_404, redirect, render
 
 from . import forms, models
-from .forms import TicketForm, ReviewForm
-
+from .forms import ReviewForm, TicketForm
+from .models import UserFollows
 
 User = get_user_model()
 

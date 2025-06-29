@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 
 from . import models
-from .widgets import StarRatingWidget
 from .models import UserFollows
+from .widgets import StarRatingWidget
 
 REVIEW_CHOICES = [
     ('1', '1'),
@@ -83,7 +83,7 @@ class FollowUsersForm(forms.Form):
         current_user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         User = get_user_model()
-        
+
         # Exclure l'utilisateur courant et ceux déjà suivis
         users_qs = User.objects.all()
         if current_user:

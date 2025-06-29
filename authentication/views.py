@@ -1,10 +1,10 @@
-from django.contrib.auth.views import LoginView
 from django.conf import settings
 from django.contrib.auth import login
+from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
-from .forms import CustomLoginForm
 
 from . import forms
+from .forms import CustomLoginForm
 
 
 def signup_page(request):
