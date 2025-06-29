@@ -1,23 +1,7 @@
 {% extends 'base.html' %}
 {% load review_extras %}
+{% load static %}
 {% block content %}
-    <style>
-        .post {
-            border: 1px solid #000;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-            background: #fff;
-        }
-        .post img {
-            max-width: 150px;
-            max-height: 150px;
-            width: auto;
-            height: auto;
-            display: block;
-            margin-bottom: 8px;
-        }
-    </style>
     <div class="grid-container">
         <h3 class="text-center my-8">Vos posts</h3>
         {% if posts|length == 0 %}
@@ -25,40 +9,40 @@
         {% endif %} 
         {% for post in posts %}
             {% if post.post_type == 'review' %}
-                <div class="post" style="border:2px solid #4a90e2; background:#f7faff;">
+                <div class="border-2 border-blue-400 bg-blue-50 rounded-lg shadow p-6 mb-4">
                     {% if post.user == user %}
-                        <p>Vous avez publié une critique {{ post.user }}</p>
+                        <p class="text-sm text-gray-600 font-semibold">Vous avez publié une critique {{ post.user }}</p>
                     {% else %}
-                        <p>{{ post.user }} a publié une critique</p>
+                        <p class="text-sm text-gray-600 font-semibold">{{ post.user }} a publié une critique</p>
                     {% endif %}
-                    <p>{{ post.created|date:"H:i, d F Y" }}</p>
-                    <p><b>{{ post.headline }}</b></p>
+                    <p class="text-xs text-gray-400 mb-2">{{ post.created|date:"H:i, d F Y" }}</p>
+                    <h3 class="font-bold text-lg text-blue-900">{{ post.headline }}</h3>
                     <div class="rating-display mb-2">
                         {% display_stars post.rating %}
                     </div>
-                    <p>{{ post.body }}</p>
-                    <div style="border:1px solid #aaa; background:#fff; margin:16px 0; padding:10px;">
-                        <span>Ticket - {% if post.ticket.user == user %}Vous{% else %}{{ post.ticket.user }}{% endif %}</span><br>
-                        <span>{{ post.ticket.title }}</span><br>
+                    <p class="mb-2">{{ post.body }}</p>
+                    <div class="border border-gray-300 bg-white rounded p-4 my-4">
+                        <span class="font-semibold">Ticket - {% if post.ticket.user == user %}Vous{% else %}{{ post.ticket.user }}{% endif %}</span><br>
+                        <span class="font-bold">{{ post.ticket.title }}</span><br>
                         <span>{{ post.ticket.description }}</span>
                         {% if post.ticket.image %}<br>
-                            <img src="{{ post.ticket.image.url }}" alt="Image du ticket {{ post.ticket.title }}" style="max-width:100px;max-height:100px;">
+                            <img src="{{ post.ticket.image.url }}" alt="Image du ticket {{ post.ticket.title }}" class="max-w-[100px] max-h-[100px] rounded mt-2">
                         {% endif %}
                     </div>
-                    <div style="width:100%; display:flex; justify-content:flex-end; gap:10px;">
+                    <div class="button-container-right">
                         <a href="{% url 'edit-review' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition w-32">Modifier</button></a>
                         <a href="{% url 'delete-review' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition w-32">Supprimer</button></a>
                     </div>
                 </div>
             {% elif post.post_type == 'ticket' %}
-                <div class="post">
+                <div class="bg-white rounded-lg shadow p-6 mb-4 border border-gray-300">
                     {% if post.user == user %}
-                        <p>Vous avez publié un ticket</p>
+                        <p class="text-sm text-gray-600 font-semibold">Vous avez publié un ticket</p>
                     {% else %}
-                        <p>{{ post.user }} a publié un ticket</p>
+                        <p class="text-sm text-gray-600 font-semibold">{{ post.user }} a publié un ticket</p>
                     {% endif %}
                     {% include "review/_ticket.html" %}
-                    <div style="width:100%; display:flex; justify-content:flex-end; gap:10px;">
+                    <div class="button-container-right">
                         <a href="{% url 'edit-ticket' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition w-32">Modifier</button></a>
                         <a href="{% url 'delete-ticket' post.id %}"><button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition w-32">Supprimer</button></a>
                     </div>

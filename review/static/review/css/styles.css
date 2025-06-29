@@ -5,6 +5,25 @@
     gap: 2px;
 }
 
+/* Style global pour les titres h3 - plus gros */
+h3 {
+    font-size: 1.25rem !important; /* Équivalent à text-xl en Tailwind */
+    font-weight: 700 !important; /* Font-bold */
+}
+
+/* Styles pour forcer l'alignement à droite des boutons */
+.button-container-right {
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 0.5rem !important;
+    margin-top: 1rem !important;
+    width: 100% !important;
+}
+
+.button-container-right a {
+    text-decoration: none !important;
+}
+
 .rating-stars {
     display: inline-flex;
     gap: 2px;
