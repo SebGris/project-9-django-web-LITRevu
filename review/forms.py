@@ -3,6 +3,14 @@ from django.contrib.auth import get_user_model
 
 from . import models
 
+REVIEW_CHOICES = [
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5'),
+]
+
 User = get_user_model()
 
 
@@ -45,7 +53,7 @@ class ReviewForm(forms.ModelForm):
             'body': 'Commentaire',
         }
         widgets = {
-            'rating': forms.NumberInput(attrs={'class': 'form-control'}),
+            'rating': forms.RadioSelect(choices=REVIEW_CHOICES),
             'headline': forms.TextInput(
                 attrs={'style': 'border:2px solid #333; width:100%;'}
             ),

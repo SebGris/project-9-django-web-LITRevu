@@ -5,9 +5,10 @@ from django.contrib.auth import get_user_model
 from .models import UserFollows
 from django.http import HttpResponseForbidden
 from django.db.models import Value, CharField
-import time
 
 from . import forms, models
+from .forms import TicketForm, ReviewForm
+
 
 User = get_user_model()
 
@@ -28,7 +29,6 @@ def create_ticket(request):
 
 @login_required
 def create_review(request, ticket_id=None):
-    from .forms import TicketForm, ReviewForm
     if ticket_id:
         ticket = get_object_or_404(models.Ticket, id=ticket_id)
         if request.method == 'POST':
@@ -195,19 +195,13 @@ def posts(request):
 
 @login_required
 def unfollow_user(request, user_id):
-    
     if request.method == "POST":
-        print(time.time())
         follow = get_object_or_404(
             UserFollows,
             user=request.user,
             followed_user__id=user_id
         )
-        print(time.time())
-
         follow.delete()
-        print(time.time())
-
     return redirect('follow-users')
 
 @login_required

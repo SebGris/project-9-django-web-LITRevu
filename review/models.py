@@ -10,7 +10,7 @@ class Ticket(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(blank=True, null=True)
-    time_created = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         if self.pk:
