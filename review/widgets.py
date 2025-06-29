@@ -29,7 +29,11 @@ class StarRatingWidget(forms.Select):
             <input type="hidden" id="{field_id}" name="{name}" value="{current_value}">
             <div class="stars-display">
                 {''.join([
-                    f'<span class="star" data-rating="{i}" style="color: {"#ffd700" if i <= current_value else "#ddd"}; cursor: pointer; font-size: 24px;">★</span>'
+                    (
+                        f'<span class="star" data-rating="{i}" '
+                        f'style="color: {"#ffd700" if i <= current_value else "#ddd"}; '
+                        f'cursor: pointer; font-size: 24px;">★</span>'
+                    )
                     for i in range(1, 6)
                 ])}
             </div>

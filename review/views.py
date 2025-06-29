@@ -81,7 +81,11 @@ def edit_ticket(request, ticket_id):
         )
     edit_form = forms.TicketForm(instance=ticket)
     if request.method == 'POST':
-        edit_form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
+        edit_form = forms.TicketForm(
+            request.POST,
+            request.FILES,
+            instance=ticket
+        )
         if edit_form.is_valid():
             edit_form.save()
             messages.success(request, "Ticket modifié avec succès !")
@@ -156,14 +160,28 @@ def reviews(request):
 @login_required
 def flux(request):
     # Récupérer les utilisateurs suivis
-    followed_users = models.UserFollows.objects.filter(user=request.user).values_list('followed_user', flat=True)
+    followed_users = models.UserFollows.objects.filter(
+        user=request.user
+    ).values_list('followed_user', flat=True)
     users_to_show = list(followed_users) + [request.user.id]
-    tickets = models.Ticket.objects.filter(user__id__in=users_to_show).annotate(post_type=Value('ticket', output_field=CharField()))
-    reviews = models.Review.objects.filter(user__id__in=users_to_show).annotate(post_type=Value('review', output_field=CharField()))
+    tickets = models.Ticket.objects.filter(
+        user__id__in=users_to_show
+    ).annotate(
+        post_type=Value('ticket', output_field=CharField())
+    )
+    reviews = models.Review.objects.filter(
+        user__id__in=users_to_show
+    ).annotate(
+        post_type=Value('review', output_field=CharField())
+    )
     # Récupérer les tickets de l'utilisateur connecté
     user_tickets = models.Ticket.objects.filter(user=request.user)
     # Ajouter les reviews en réponse aux tickets de l'utilisateur connecté
-    reviews_on_user_tickets = models.Review.objects.filter(ticket__in=user_tickets).annotate(post_type=Value('review', output_field=CharField()))
+    reviews_on_user_tickets = models.Review.objects.filter(
+        ticket__in=user_tickets
+    ).annotate(
+        post_type=Value('review', output_field=CharField())
+    )
     reviews = reviews | reviews_on_user_tickets
     flux = sorted(
         list(tickets) + list(reviews),
@@ -175,8 +193,12 @@ def flux(request):
 
 @login_required
 def posts(request):
-    tickets = models.Ticket.objects.filter(user=request.user).annotate(post_type=Value('ticket', output_field=CharField()))
-    reviews = models.Review.objects.filter(user=request.user).annotate(post_type=Value('review', output_field=CharField()))
+    tickets = models.Ticket.objects.filter(user=request.user).annotate(
+        post_type=Value('ticket', output_field=CharField())
+    )
+    reviews = models.Review.objects.filter(user=request.user).annotate(
+        post_type=Value('review', output_field=CharField())
+    )
     posts = sorted(
         list(tickets) + list(reviews),
         key=lambda obj: getattr(obj, 'created', None),
