@@ -75,10 +75,8 @@ def create_review(request, ticket_id=None):
 @login_required
 def edit_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
-    if (
-        ticket.user != request.user
-        or not request.user.has_perm('review.change_own_ticket')
-    ):
+    # Seul le propriétaire peut modifier son ticket
+    if ticket.user != request.user:
         return HttpResponseForbidden(
             "Vous n'êtes pas autorisé à modifier ce ticket."
         )
@@ -98,10 +96,8 @@ def edit_ticket(request, ticket_id):
 @login_required
 def edit_review(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
-    if (
-        review.user != request.user
-        or not request.user.has_perm('review.change_own_review')
-    ):
+    # Seul le propriétaire peut modifier sa critique
+    if review.user != request.user:
         return HttpResponseForbidden(
             "Vous n'êtes pas autorisé à modifier cette critique."
         )
@@ -121,10 +117,8 @@ def edit_review(request, review_id):
 @login_required
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
-    if (
-        ticket.user != request.user
-        or not request.user.has_perm('review.change_own_ticket')
-    ):
+    # Seul le propriétaire peut supprimer son ticket
+    if ticket.user != request.user:
         return HttpResponseForbidden(
             "Vous n'êtes pas autorisé à supprimer ce ticket."
         )
@@ -138,10 +132,8 @@ def delete_ticket(request, ticket_id):
 @login_required
 def delete_review(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
-    if (
-        review.user != request.user
-        or not request.user.has_perm('review.change_own_review')
-    ):
+    # Seul le propriétaire peut supprimer sa critique
+    if review.user != request.user:
         return HttpResponseForbidden(
             "Vous n'êtes pas autorisé à supprimer cette critique."
         )

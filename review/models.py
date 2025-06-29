@@ -28,11 +28,6 @@ class Ticket(models.Model):
             self.image.delete(save=False)
         super().delete(*args, **kwargs)
 
-    class Meta:
-        permissions = [
-            ("change_own_ticket", "Peut modifier son propre ticket"),
-        ]
-
 
 class Review(models.Model):
     ticket = models.ForeignKey(
@@ -63,11 +58,6 @@ class Review(models.Model):
             else:
                 stars_html += '<span class="star empty">☆</span>'
         return stars_html
-
-    class Meta:
-        permissions = [
-            ("change_own_review", "Peut modifier sa propre critique"),
-        ]
 
 
 class UserFollows(models.Model):
