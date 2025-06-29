@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 
 from . import models
-from .widgets import StarRatingWidget, SimpleStarRatingWidget
+from .widgets import StarRatingWidget
+from .models import UserFollows
 
 REVIEW_CHOICES = [
     ('1', '1'),
@@ -78,19 +79,21 @@ class FollowUsersForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
+        # Extraire l'utilisateur des kwargs avant d'appeler super()
+        current_user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         User = get_user_model()
+        
         # Exclure l'utilisateur courant et ceux déjà suivis
-        if 'user' in kwargs:
-            current_user = kwargs['user']
-        else:
-            current_user = None
         users_qs = User.objects.all()
         if current_user:
             users_qs = users_qs.exclude(pk=current_user.pk)
-            from .models import UserFollows
-            already_followed = UserFollows.objects.filter(user=current_user).values_list('followed_user', flat=True)
+            already_followed = UserFollows.objects.filter(
+                user=current_user
+            ).values_list('followed_user', flat=True)
             users_qs = users_qs.exclude(pk__in=already_followed)
-        self.fields['username'].choices = [('', '--- Sélectionnez un utilisateur ---')] + [
+        self.fields['username'].choices = [
+            ('', '--- Sélectionnez un utilisateur ---')
+        ] + [
             (user.username, user.username) for user in users_qs
         ]

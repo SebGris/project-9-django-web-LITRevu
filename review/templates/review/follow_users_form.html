@@ -3,12 +3,12 @@
     <p class="mb-4">Bienvenue <em>{{ user.username }}</em>, vous pouvez suivre ici d'autres utilisateurs pour voir leurs activités dans votre flux.</p>
     <h3 class="text-center my-8">Suivre d'autres utilisateurs</h3>
     <form method="post">
+        {% csrf_token %}
         <div style="display: flex; align-items: flex-end; gap: 1rem;">
             <label for="{{ form.username.id_for_label }}">{{ form.username.label }} : </label>
             {{ form.username }}
             <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>
         </div>
-        {% csrf_token %}
     </form>
     {% if message %}
         <div style="color: red;">{{ message }}</div>

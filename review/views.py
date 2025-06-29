@@ -165,7 +165,7 @@ def flux(request):
     user_tickets = models.Ticket.objects.filter(user=request.user)
     # Ajouter les reviews en réponse aux tickets de l'utilisateur connecté
     reviews_on_user_tickets = models.Review.objects.filter(ticket__in=user_tickets).annotate(post_type=Value('review', output_field=CharField()))
-    reviews = reviews | reviews_on_user_tickets  # Utilisez union si reviews est un QuerySet
+    reviews = reviews | reviews_on_user_tickets
     flux = sorted(
         list(tickets) + list(reviews),
         key=lambda obj: obj.created,
@@ -200,7 +200,7 @@ def unfollow_user(request, user_id):
 def follow_users(request):
     message = None
     if request.method == 'POST':
-        form = forms.FollowUsersForm(request.POST)
+        form = forms.FollowUsersForm(request.POST, user=request.user)
         if form.is_valid():
             username = form.cleaned_data['username']
             try:
@@ -221,7 +221,7 @@ def follow_users(request):
             except User.DoesNotExist:
                 message = f"L'utilisateur '{username}' n'existe pas."
     else:
-        form = forms.FollowUsersForm()
+        form = forms.FollowUsersForm(user=request.user)
     followers = models.UserFollows.objects.filter(followed_user=request.user)
     following = models.UserFollows.objects.filter(user=request.user)
     return render(
