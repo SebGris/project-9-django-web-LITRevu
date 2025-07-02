@@ -60,14 +60,7 @@ Assurez-vous que Node.js est bien installé, puis exécutez :
 npm install
 ```
 
-### 6. Construire les fichiers statiques avec Tailwind CSS
-
-Générez les fichiers statiques :
-```bash
-npm run build
-```
-
-### 7. Lancer le serveur de développement
+### 6. Lancer le serveur de développement
 
 Démarrez le serveur Django :
 ```bash
