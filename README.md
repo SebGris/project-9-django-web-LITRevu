@@ -21,7 +21,7 @@ Avant de commencer, assurez-vous d’avoir installé :
 
 ### 1. Cloner le dépôt
 
-Ouvrir le terminal dans un dossier de travail (par exemple : `C:\Users\SebastienGrison\Documents\GitHub`) :
+Ouvrir le terminal dans un dossier de travail (par exemple : `C:\Users\VotreNom\Documents\GitHub`) :
 ```bash
 git clone https://github.com/SebGris/project-9-django-web-LITRevu.git
 ```
