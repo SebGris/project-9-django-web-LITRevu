@@ -1,6 +1,5 @@
 # Projet Django pour LITRevu
 
-Bienvenue dans **Mon Projet Django pour LITRevu** !  
 Ce guide vous explique comment configurer et exécuter ce projet Django en local sur votre machine, de l’installation des dépendances à l’accès à l’application.
 
 ---
