@@ -1,5 +1,3 @@
-https://django-tailwind.readthedocs.io/en/latest/settings.html
-
 # Projet Django pour LITRevu
 
 Bienvenue dans **Mon Projet Django pour LITRevu** !  
@@ -9,32 +7,35 @@ Ce guide vous explique comment configurer et exécuter ce projet Django en local
 
 ## ✅ Prérequis
 
-Avant de commencer, assurez-vous d’avoir installé :
+Avant de commencer, assurez-vous d’avoir installé :
 
 - [Python](https://www.python.org/downloads/) (version 3.8 ou supérieure)
 - [pip](https://pip.pypa.io/en/stable/installation/) (généralement inclus avec Python)
 - [Git](https://git-scm.com/downloads)
 - [Node.js](https://nodejs.org/) (pour l'utilisation de Tailwind CSS)
-- Un éditeur de code (ex : VS Code)
+- [Visual Studio Code](https://code.visualstudio.com/download)
 
 ---
 
-## 📥 Configuration de l'environnement local
+## 📥 Configuration de l’environnement local
 
 ### 1. Cloner le dépôt
 
+Ouvrir le terminal dans un dossier de travail (par exemple : `C:\Users\SebastienGrison\Documents\GitHub`) :
 ```bash
 git clone https://github.com/SebGris/project-9-django-web-LITRevu.git
-cd project-9-django-web-LITRevu
 ```
+Ouvrez ensuite le dossier `project-9-django-web-LITRevu` dans Visual Studio Code.
 
 ### 2. Créer un environnement virtuel
-Il est recommandé d'utiliser un environnement virtuel pour isoler les dépendances de votre projet.
+
+Il est recommandé d’utiliser un environnement virtuel pour isoler les dépendances de votre projet.
+Dans le terminal de Visual Studio Code, exécutez :
 ```bash
 python -m venv venv
 ```
 
-### 3. Activer l'environnement virtuel
+### 3. Activer l’environnement virtuel
 
 Sur Windows :
 ```bash
@@ -45,48 +46,52 @@ Sur macOS et Linux :
 source venv/bin/activate
 ```
 
-### 4. Installer les dépendances
+### 4. Installer les dépendances Python
 
-Installez les dépendances Python nécessaires en utilisant pip :
+Installez les dépendances nécessaires :
 ```bash
 pip install -r requirements.txt
 ```
 
-### 8. Installer les dépendances Node.js
+### 5. Installer les dépendances Node.js
 
-Assurez-vous d'avoir Node.js installé, puis installez les dépendances nécessaires pour Tailwind CSS.
+Assurez-vous que Node.js est bien installé, puis exécutez :
 ```bash
 npm install
 ```
 
-### 9. IConstruire les fichiers statiques avec Tailwind CSS
+### 6. Construire les fichiers statiques avec Tailwind CSS
 
-Construisez les fichiers statiques en utilisant Tailwind CSS :
+Générez les fichiers statiques :
 ```bash
 npm run build
 ```
 
-### 10. Lancer le serveur de développement
+### 7. Lancer le serveur de développement
 
-Enfin, lancez le serveur de développement Django :
+Démarrez le serveur Django :
 ```bash
 python manage.py runserver
 ```
-Ouvrez votre navigateur et accédez à http://127.0.0.1:8000/ pour voir votre application en action.
+Puis ouvrez votre navigateur à l’adresse : http://127.0.0.1:8000/
+
+---
 
 ## 📄 Aide
 
-Accès à l’administration Django : 
+Accès à l’administration Django :  
 👉 http://127.0.0.1:8000/admin/  
-Connectez-vous avec le superutilisateur créé précédemment.
+Connectez-vous avec le superutilisateur créé auparavant.
 
-Si vous rencontrez des problèmes, vérifiez que :
+En cas de problème, vérifiez que :
+
 - l’environnement virtuel est bien activé
 - toutes les dépendances sont installées (`pip install -r requirements.txt`)
-- vous utilisez la bonne version de Python
-- les migrations sont appliquées sans erreur
+- vous utilisez une version compatible de Python
+- les migrations ont été correctement appliquées
 
-Sinon, consultez la documentation Django : https://docs.djangoproject.com/fr/
+Consultez aussi la documentation officielle :  
+👉 https://docs.djangoproject.com/fr/
 
 ---
 
