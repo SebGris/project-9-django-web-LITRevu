@@ -59,27 +59,30 @@ Assurez-vous que Node.js est bien installé, puis exécutez :
 npm install
 ```
 
-### 6. Lancer le serveur de développement
+### 6. Lancer le serveur de developpement
 
 Démarrez le serveur Django :
 ```bash
 python manage.py runserver
 ```
-Puis ouvrez votre navigateur à l’adresse : http://127.0.0.1:8000/
 
-Accès à l’administration Django :  http://127.0.0.1:8000/admin/  
-Connectez-vous avec le superutilisateur créé auparavant.
+### 7. Accéder à l'application
 
+Ouvrez votre navigateur aux adresses suivantes :
+
+- **Application principale** : http://127.0.0.1:8000/
+- **Interface d'administration** : http://127.0.0.1:8000/admin/  
+- **Création de compte** : http://127.0.0.1:8000/signup/er
 ---
 
 ## 📄 Aide
 
 En cas de problème, vérifiez que :
 
-- l’environnement virtuel est bien activé
+- l'environnement virtuel est bien activé (`venv\Scripts\activate` sur Windows)
 - toutes les dépendances sont installées (`pip install -r requirements.txt`)
-- vous utilisez une version compatible de Python
-- les migrations ont été correctement appliquées
+- vous utilisez une version compatible de Python (3.8+)
+- Node.js est installé pour Tailwind CSS
 
 Consultez aussi la documentation officielle :  
 👉 https://docs.djangoproject.com/fr/
@@ -89,8 +92,25 @@ Consultez aussi la documentation officielle :
 👉 https://docs.djangoproject.com/fr/5.2/topics/db/aggregation/#generating-aggregates-for-each-item-in-a-queryset
 👉 https://realpython.com/python-pyproject-toml/
 
----
+### Commandes utiles
 
-## ✨ À propos
+```bash
+# Créer un superutilisateur (si nécessaire)
+python manage.py createsuperuser
 
-Ce projet a été réalisé dans le cadre du parcours **Développeur d'application Python** – OpenClassrooms.
+# Démarrer Tailwind en mode développement (optionnel)
+python manage.py tailwind start
+
+# Lancer les tests
+python manage.py test
+```
+
+### Fonctionnalités principales
+
+- **Authentification** : Inscription, connexion, déconnexion
+- **Tickets** : Demander des critiques de livres/articles
+- **Critiques** : Publier des critiques avec notes (1-5 étoiles)
+- **Abonnements** : Suivre d'autres utilisateurs
+- **Flux** : Voir l'activité des utilisateurs suivisement
+
+⚠️ **Note** : Ce projet OpenClassrooms inclut une base de données SQLite avec des données de démonstration pour faciliter l'évaluation.
