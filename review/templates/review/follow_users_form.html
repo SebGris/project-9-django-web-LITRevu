@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p class="mb-4">Bienvenue <em>{{ user.username }}</em>, vous pouvez suivre ici d'autres utilisateurs pour voir leurs activités dans votre flux.</p>
-    <h3 class="text-center my-8">Suivre d'autres utilisateurs</h3>
-    <form method="post">
-        {% csrf_token %}
-        <div style="display: flex; align-items: flex-end; gap: 1rem;">
-            <label for="{{ form.username.id_for_label }}">{{ form.username.label }} : </label>
-            {{ form.username }}
-            <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>
-        </div>
-    </form>
-    {% if message %}
-        <div style="color: red;">{{ message }}</div>
-    {% endif %}
+    <main role="main">
+        <h1 class="text-center my-8">Abonnements</h1>
+        <p class="mb-4">Bienvenue <em>{{ user.username }}</em>, vous pouvez suivre ici d'autres utilisateurs pour voir leurs activités dans votre flux.</p>
+        <h2 class="text-center my-8">Suivre d'autres utilisateurs</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div style="display: flex; align-items: flex-end; gap: 1rem;">
+                <label for="{{ form.username.id_for_label }}">{{ form.username.label }} : </label>
+                {{ form.username }}
+                <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition w-32">Envoyer</button>
+            </div>
+        </form>
+        {% if message %}
+            <div style="color: red;">{{ message }}</div>
+        {% endif %}
 
-    <h3 class="text-center my-8">Abonnements</h3>
+        <h2 class="text-center my-8">Vos abonnements</h2>
     <div class="flex flex-col gap-2 mb-8">
         {% for follow in following %}
             <div class="flex items-center justify-between border border-gray-400 rounded px-4 py-2 bg-gray-50">
@@ -29,7 +31,7 @@
         {% endfor %}
     </div>
 
-    <h3 class="text-center my-8">Abonnés</h3>
+    <h2 class="text-center my-8">Vos abonnés</h2>
     <div class="flex flex-col gap-2 mb-8">
         {% for follow in followers %}
             <div class="border border-gray-400 rounded px-4 py-2 bg-gray-50">{{ follow.user }}</div>
@@ -37,4 +39,5 @@
             <div class="border border-gray-400 rounded px-4 py-2 bg-gray-50">Aucun abonné.</div>
         {% endfor %}
     </div>
+    </main>
 {% endblock content %}

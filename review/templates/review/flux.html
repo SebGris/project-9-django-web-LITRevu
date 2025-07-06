@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% load review_extras %}
 {% block content %}
-    <div class="flex gap-4 items-center mb-8 w-full px-2">
-        <a href="{% url 'ticket-create' %}" class="flex-1 mx-6">
-            <button type="button" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Demander une critique</button>
-        </a>
-        <a href="{% url 'review-create' %}" class="flex-1 mx-6">
-            <button type="button" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
-        </a>
-    </div>
+    <main role="main">
+        <h1 class="text-center my-8">Flux</h1>
+        <div class="flex gap-4 items-center mb-8 w-full px-2">
+            <a href="{% url 'ticket-create' %}" class="flex-1 mx-6">
+                <button type="button" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Demander une critique</button>
+            </a>
+            <a href="{% url 'review-create' %}" class="flex-1 mx-6">
+                <button type="button" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold transition">Créer une critique</button>
+            </a>
+        </div>
     <div class="grid-container">
         {% for post in flux %}
             {% if post.post_type == 'review' %}
@@ -18,7 +20,7 @@
                         <p class="text-right mb-0">{{ post.created|date:"H:i, d F Y" }}</p>
                     </div>
                     <div class="flex items-baseline mt-2 gap-4">
-                        <h3 class="font-bold text-lg text-blue-900">{{ post.headline }}</h3>
+                        <h2 class="font-bold text-lg text-blue-900">{{ post.headline }}</h2>
                         <div class="rating-display">
                             {% display_stars post.rating %}
                         </div>
@@ -48,4 +50,5 @@
             {% endif %}
         {% endfor %}
     </div>
+    </main>
 {% endblock content %}
