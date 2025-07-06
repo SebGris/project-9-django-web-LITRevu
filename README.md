@@ -59,7 +59,9 @@ Assurez-vous que Node.js est bien installé, puis exécutez :
 npm install
 ```
 
-### 6. Lancer le serveur de developpement
+### 6. Lancer le serveur de développement
+
+⚠️ **Note** : Ce projet OpenClassrooms inclut une base de données SQLite avec des données de démonstration pour faciliter l'évaluation.
 
 Démarrez le serveur Django :
 ```bash
@@ -72,7 +74,8 @@ Ouvrez votre navigateur aux adresses suivantes :
 
 - **Application principale** : http://127.0.0.1:8000/
 - **Interface d'administration** : http://127.0.0.1:8000/admin/  
-- **Création de compte** : http://127.0.0.1:8000/signup/er
+- **Création de compte** : http://127.0.0.1:8000/signup/
+
 ---
 
 ## 📄 Aide
@@ -111,6 +114,10 @@ python manage.py test
 - **Tickets** : Demander des critiques de livres/articles
 - **Critiques** : Publier des critiques avec notes (1-5 étoiles)
 - **Abonnements** : Suivre d'autres utilisateurs
-- **Flux** : Voir l'activité des utilisateurs suivisement
+- **Flux** : Voir l'activité des utilisateurs suivis
 
-⚠️ **Note** : Ce projet OpenClassrooms inclut une base de données SQLite avec des données de démonstration pour faciliter l'évaluation.
+---
+
+## ✨ À propos
+
+Ce projet a été réalisé dans le cadre du parcours **Développeur d'application Python** – OpenClassrooms.
