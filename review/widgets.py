@@ -31,8 +31,8 @@ class StarRatingWidget(forms.Select):
                 {''.join([
                     (
                         f'<span class="star" data-rating="{i}" '
-                        f'style="color: {"#ffd700" if i <= current_value else "#ddd"}; '
-                        f'cursor: pointer; font-size: 24px;">★</span>'
+                        f'style="color: {"#ffc107" if i <= current_value else "#ddd"}; '
+                        f'cursor: pointer; font-size: 32px; -webkit-text-stroke: 1px #000; text-stroke: 1px #000;">★</span>'
                     )
                     for i in range(1, 6)
                 ])}
@@ -49,7 +49,7 @@ class StarRatingWidget(forms.Select):
                 stars.forEach((star, index) => {{
                     const starValue = index + 1;
                     if (starValue <= rating) {{
-                        star.style.color = '#ffd700';
+                        star.style.color = '#ffc107';
                     }} else {{
                         star.style.color = '#ddd';
                     }}
@@ -71,7 +71,7 @@ class StarRatingWidget(forms.Select):
                     stars.forEach((s, index) => {{
                         const starValue = index + 1;
                         if (starValue <= rating) {{
-                            s.style.color = '#ffed4e';
+                            s.style.color = '#ffe066';
                         }} else {{
                             s.style.color = '#ddd';
                         }}
