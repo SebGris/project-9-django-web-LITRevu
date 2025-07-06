@@ -67,13 +67,12 @@ python manage.py runserver
 ```
 Puis ouvrez votre navigateur à l’adresse : http://127.0.0.1:8000/
 
+Accès à l’administration Django :  http://127.0.0.1:8000/admin/  
+Connectez-vous avec le superutilisateur créé auparavant.
+
 ---
 
 ## 📄 Aide
-
-Accès à l’administration Django :  
-👉 http://127.0.0.1:8000/admin/  
-Connectez-vous avec le superutilisateur créé auparavant.
 
 En cas de problème, vérifiez que :
 
