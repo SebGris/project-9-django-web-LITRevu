@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 class Ticket(models.Model):
-    title = models.CharField(max_length=128, default="Titre")
+    title = models.CharField(max_length=128)
     description = models.CharField(max_length=2048, blank=True)
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
