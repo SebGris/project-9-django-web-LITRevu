@@ -30,8 +30,14 @@ def create_ticket(request):
 def create_review(request, ticket_id=None):
     if ticket_id:
         ticket = get_object_or_404(models.Ticket, id=ticket_id)
+        is_creator = (ticket.user == request.user)
+        CustomTicketForm = forms.get_ticket_form(is_creator=is_creator)
+
         if request.method == 'POST':
-            ticket_form = TicketForm(request.POST, request.FILES, instance=ticket)
+            ticket_form = CustomTicketForm(request.POST, request.FILES, instance=ticket)
+            if not is_creator:
+                for field in ticket_form.fields.values():
+                    field.disabled = True
             review_form = ReviewForm(request.POST)
             if review_form.is_valid():
                 review = review_form.save(commit=False)
@@ -41,7 +47,10 @@ def create_review(request, ticket_id=None):
                 messages.success(request, "Critique ajoutée avec succès !")
                 return redirect('flux')
         else:
-            ticket_form = TicketForm(instance=ticket)
+            ticket_form = CustomTicketForm(instance=ticket)
+            if not is_creator:
+                for field in ticket_form.fields.values():
+                    field.disabled = True
             review_form = ReviewForm()
         return render(request, 'review/create_review.html', {
             'ticket_form': ticket_form,
@@ -74,7 +83,6 @@ def create_review(request, ticket_id=None):
 @login_required
 def edit_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
-    # Seul le propriétaire peut modifier son ticket
     if ticket.user != request.user:
         return HttpResponseForbidden(
             "Vous n'êtes pas autorisé à modifier ce ticket."
@@ -99,7 +107,6 @@ def edit_ticket(request, ticket_id):
 @login_required
 def edit_review(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
-    # Seul le propriétaire peut modifier sa critique
     if review.user != request.user:
         return HttpResponseForbidden(
             "Vous n'êtes pas autorisé à modifier cette critique."
@@ -120,7 +127,6 @@ def edit_review(request, review_id):
 @login_required
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
-    # Seul le propriétaire peut supprimer son ticket
     if ticket.user != request.user:
         return HttpResponseForbidden(
             "Vous n'êtes pas autorisé à supprimer ce ticket."
@@ -135,7 +141,6 @@ def delete_ticket(request, ticket_id):
 @login_required
 def delete_review(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
-    # Seul le propriétaire peut supprimer sa critique
     if review.user != request.user:
         return HttpResponseForbidden(
             "Vous n'êtes pas autorisé à supprimer cette critique."

@@ -9,6 +9,8 @@
         {{ form.description }}
     </div>
     <div class="mb-4">
-        {% include 'review/_form_image.html' with form=form %}
+        {% if form.image %}
+            {% include 'review/_form_image.html' with form=form %}
+        {% endif %}
     </div>
 </div>

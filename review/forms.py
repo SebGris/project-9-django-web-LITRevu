@@ -36,6 +36,17 @@ class TicketForm(forms.ModelForm):
         }
 
 
+def get_ticket_form(is_creator=True):
+    class CustomTicketForm(TicketForm):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            if not is_creator:
+                if 'image' in self.fields:
+                    del self.fields['image']
+
+    return CustomTicketForm
+
+
 class ReviewForm(forms.ModelForm):
 
     class Meta:
