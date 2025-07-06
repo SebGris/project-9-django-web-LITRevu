@@ -28,7 +28,10 @@ class TicketForm(forms.ModelForm):
             ),
             'description': forms.Textarea(
                 attrs={
-                    'style': 'border:2px solid #333; width:100%;',
+                    'style': (
+                        'border:2px solid #333; '
+                        'width:100%;'
+                    ),
                     'rows': 8
                 }
             ),
@@ -47,7 +50,6 @@ def get_ticket_form(is_creator=True):
 
 
 class ReviewForm(forms.ModelForm):
-
     class Meta:
         model = models.Review
         fields = ['headline', 'rating', 'body']
@@ -59,11 +61,19 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             'rating': StarRatingWidget(),
             'headline': forms.TextInput(
-                attrs={'style': 'border:2px solid #333; width:100%;'}
+                attrs={
+                    'style': (
+                        'border:2px solid #333; '
+                        'width:100%;'
+                    )
+                }
             ),
             'body': forms.Textarea(
                 attrs={
-                    'style': 'border:2px solid #333; width:100%;',
+                    'style': (
+                        'border:2px solid #333; '
+                        'width:100%;'
+                    ),
                     'rows': 8
                 }
             ),
@@ -81,7 +91,7 @@ class FollowUsersForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        # Extraire l'utilisateur des kwargs avant d'appeler super()
+        # Récupère l'utilisateur actuel pour filtrer les choix disponibles
         current_user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         User = get_user_model()

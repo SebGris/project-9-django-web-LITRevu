@@ -26,12 +26,14 @@ class StarRatingWidget(forms.Select):
         # Créer l'interface d'étoiles directement
         html = f'''
         <div class="star-rating-widget" id="{field_id}_container">
-            <input type="hidden" id="{field_id}" name="{name}" value="{current_value}">
+            <input type="hidden" id="{field_id}" name="{name}"
+                   value="{current_value}">
             <div class="stars-display">
                 {''.join([
                     (
                         f'<span class="star" data-rating="{i}" '
-                        f'style="color: {"#996600" if i <= current_value else "#666"}; '
+                        f'style="color: '
+                        f'{"#996600" if i <= current_value else "#666"}; '
                         f'cursor: pointer; font-size: 32px;">★</span>'
                     )
                     for i in range(1, 6)
@@ -106,10 +108,12 @@ class SimpleStarRatingWidget(forms.RadioSelect):
 
         for i in range(1, 6):
             checked = 'checked' if str(value) == str(i) else ''
+            filled_class = 'filled' if str(value) == str(i) else 'empty'
             html += f'''
             <label class="star-label">
-                <input type="radio" name="{name}" value="{i}" {checked} style="display: none;">
-                <span class="star-radio {'filled' if str(value) == str(i) else 'empty'}">★</span>
+                <input type="radio" name="{name}" value="{i}" {checked}
+                       style="display: none;">
+                <span class="star-radio {filled_class}">★</span>
             </label>
             '''
 
