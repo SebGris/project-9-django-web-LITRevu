@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 class="text-center my-8">Créer une critique</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div style="border:2px solid #333; padding:2rem; margin-bottom:2rem; background:#fafbfc;">
-            <h3>Livre / Article</h3>
-            {% include 'review/_form_ticket.html' with form=ticket_form %}
-        </div>
-        {% include 'review/_form_review.html' with edit_form=review_form %}
-    </form>
+    <main role="main">
+        <h1 class="text-center my-8">Créer une critique</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div style="border:2px solid #333; padding:2rem; margin-bottom:2rem; background:#fafbfc;">
+                <h2>Livre / Article</h2>
+                {% include 'review/_form_ticket.html' with form=ticket_form %}
+            </div>
+            {% include 'review/_form_review.html' with edit_form=review_form %}
+        </form>
+    </main>
 {% endblock content %}
