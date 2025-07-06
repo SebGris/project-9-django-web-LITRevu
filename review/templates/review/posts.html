@@ -10,15 +10,20 @@
         {% for post in posts %}
             {% if post.post_type == 'review' %}
                 <div class="border-2 border-blue-400 bg-blue-50 rounded-lg shadow p-6 mb-4">
-                    {% if post.user == user %}
-                        <p class="text-sm text-gray-600 font-semibold">Vous avez publié une critique {{ post.user }}</p>
-                    {% else %}
-                        <p class="text-sm text-gray-600 font-semibold">{{ post.user }} a publié une critique</p>
-                    {% endif %}
-                    <p class="text-xs text-gray-400 mb-2">{{ post.created|date:"H:i, d F Y" }}</p>
-                    <h3 class="font-bold text-lg text-blue-900">{{ post.headline }}</h3>
-                    <div class="rating-display mb-2">
-                        {% display_stars post.rating %}
+                    <div class="flex justify-between items-center">
+
+                        {% if post.user == user %}
+                            <p class="text-sm text-gray-600 font-semibold">Vous avez publié une critique</p>
+                        {% else %}
+                            <p class="text-sm text-gray-600 font-semibold">{{ post.user }} a publié une critique</p>
+                        {% endif %}
+                        <p class="text-right mb-0">{{ post.created|date:"H:i, d F Y" }}</p>
+                    </div>
+                    <div class="flex items-baseline mt-2 gap-4">
+                        <h3 class="font-bold text-lg text-blue-900">{{ post.headline }}</h3>
+                        <div class="rating-display">
+                            {% display_stars post.rating %}
+                        </div>
                     </div>
                     <p class="mb-2">{{ post.body }}</p>
                     <div class="border border-gray-300 bg-white rounded p-4 my-4">
