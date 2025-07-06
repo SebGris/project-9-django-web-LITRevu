@@ -14,3 +14,4 @@ __pycache__/
 .idea/
 *.sublime-project
 *.sublime-workspace
+launch_doc.py
