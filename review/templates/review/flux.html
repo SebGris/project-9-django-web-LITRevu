@@ -31,7 +31,7 @@
                 </div>
             {% elif post.post_type == 'ticket' %}
                 <div class="bg-white rounded-lg shadow p-6 mb-4 border border-gray-300">
-                    <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié un ticket{% else %}{{ post.user }} a publié un ticket{% endif %}</p>
+                    <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez demandé une critique{% else %}{{ post.user }} a demandé une critique{% endif %}</p>
                     {% include "review/_ticket.html" %}
                     <div class="button-container-right">
                         <a href="{% url 'review-create-for-ticket' post.id %}">
