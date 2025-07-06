@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.db.models import CharField, Value, Exists, OuterRef
+from django.db.models import CharField, Exists, OuterRef, Value
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 
