@@ -34,7 +34,6 @@ urlpatterns = [
     path('follow-users/', review.views.follow_users, name='follow-users'),
     path('unfollow/<int:user_id>/', review.views.unfollow_user,
          name='unfollow-user'),
-    path('stars-demo/', review.views.stars_demo, name='stars-demo'),
 ]
 
 if settings.DEBUG:
