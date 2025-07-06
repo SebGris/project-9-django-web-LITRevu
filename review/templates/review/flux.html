@@ -13,7 +13,7 @@
         {% for post in flux %}
             {% if post.post_type == 'review' %}
                 <div class="border-2 border-blue-400 bg-blue-50 rounded-lg shadow p-6 mb-4">
-                    <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié une critique {{ post.user }} {% else %}{{ post.user }} a publié une critique{% endif %}</p>
+                    <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié une critique{% else %}{{ post.user }} a publié une critique{% endif %}</p>
                     <p class="text-xs text-gray-400 mb-2">{{ post.created|date:"H:i, d F Y" }}</p>
                     <h3 class="font-bold text-lg text-blue-900">{{ post.headline }}</h3>
                     <div class="rating-display mb-2">
