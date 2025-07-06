@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.db.models import CharField, Value
+from django.db.models import CharField, Value, Exists, OuterRef
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -30,6 +30,9 @@ def create_ticket(request):
 def create_review(request, ticket_id=None):
     if ticket_id:
         ticket = get_object_or_404(models.Ticket, id=ticket_id)
+        if ticket.reviews.exists():
+            messages.error(request, "Une critique a déjà été publiée pour ce ticket.")
+            return redirect('flux')
         is_creator = (ticket.user == request.user)
         CustomTicketForm = forms.get_ticket_form(is_creator=is_creator)
 
@@ -169,11 +172,15 @@ def flux(request):
         user=request.user
     ).values_list('followed_user', flat=True)
     users_to_show = list(followed_users) + [request.user.id]
+
+    reviews_for_tickets = models.Review.objects.filter(ticket=OuterRef('pk'))
     tickets = models.Ticket.objects.filter(
         user__id__in=users_to_show
     ).annotate(
-        post_type=Value('ticket', output_field=CharField())
+        post_type=Value('ticket', output_field=CharField()),
+        has_review=Exists(reviews_for_tickets)
     )
+
     reviews = models.Review.objects.filter(
         user__id__in=users_to_show
     ).annotate(
