@@ -228,7 +228,7 @@ def flux(request):
     tickets = models.Ticket.objects.filter(
         user__id__in=users_to_show
     ).annotate(
-        post_type=Value('ticket', output_field=CharField()),
+        post_type=Value('ticket', output_field=CharField()),  # c'est du texte
         has_review=Exists(reviews_for_tickets)  # Permet de masquer le bouton
     )
 
@@ -249,6 +249,8 @@ def flux(request):
     ).annotate(
         post_type=Value('review', output_field=CharField())
     )
+    # Fusionner les deux QuerySets de critiques avec l'opérateur union (|)
+    # Cela évite les doublons automatiquement
     reviews = reviews | reviews_on_user_tickets
 
     # Combiner et trier par date de création (plus récent en premier)
