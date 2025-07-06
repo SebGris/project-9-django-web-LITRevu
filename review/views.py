@@ -123,6 +123,7 @@ def edit_review(request, review_id):
             return redirect('posts')
     context = {
         'edit_form': edit_form,
+        'ticket': review.ticket,
     }
     return render(request, 'review/edit_review.html', context=context)
 
