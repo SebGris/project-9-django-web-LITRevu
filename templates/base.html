@@ -7,20 +7,20 @@
         {% block extra_css %}{% endblock %}
     </head>
     <body class="min-h-screen flex flex-col">
-        <nav class="w-full bg-violet-300 text-blue-600 shadow-md py-4 px-8 flex items-center justify-between">
+        <nav class="w-full bg-violet-300 text-blue-600 shadow-md py-4 px-8 flex items-center justify-between" role="navigation" aria-label="Navigation principale">
             <div class="flex items-center gap-4">
-                <h1 class="text-2xl font-bold text-blue-600 tracking-wide">LITRevu</h1>
+                <div class="text-2xl font-bold text-blue-600 tracking-wide" aria-label="LITRevu - Accueil">LITRevu</div>
             </div>
             {% if user.is_authenticated %}
-            <div class="flex items-center gap-6">
-                <h2><a href="{% url 'flux' %}" class="hover:text-pink-400 transition">Flux</a></h2>
-                <h2><a href="{% url 'posts' %}" class="hover:text-pink-400 transition">Posts</a></h2>
-                <h2><a href="{% url 'follow-users' %}" class="hover:text-pink-400 transition">Abonnements</a></h2>
-                <h2><form action="{% url 'logout' %}" method="post" class="inline">
+            <ul class="flex items-center gap-6 list-none" role="menubar">
+                <li role="none"><a href="{% url 'flux' %}" class="hover:text-pink-400 transition" role="menuitem">Flux</a></li>
+                <li role="none"><a href="{% url 'posts' %}" class="hover:text-pink-400 transition" role="menuitem">Posts</a></li>
+                <li role="none"><a href="{% url 'follow-users' %}" class="hover:text-pink-400 transition" role="menuitem">Abonnements</a></li>
+                <li role="none"><form action="{% url 'logout' %}" method="post" class="inline">
                     {% csrf_token %}
-                    <button type="submit" class="bg-transparent text-blue-600 hover:text-pink-400 transition">Se déconnecter</button>
-                </form></h2>
-            </div>
+                    <button type="submit" class="bg-transparent text-blue-600 hover:text-pink-400 transition" role="menuitem">Se déconnecter</button>
+                </form></li>
+            </ul>
             {% endif %}
         </nav>
         <main class="flex-1 w-full max-w-3xl mx-auto mt-8">

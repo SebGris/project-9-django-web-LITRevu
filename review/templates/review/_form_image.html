@@ -1,28 +1,37 @@
 {# Partial pour formulaire image #}
 <label for="{{ form.image.id_for_label }}" class="block font-semibold mb-4">{{ form.image.label }}</label>
-<div>
+<div role="group" aria-labelledby="{{ form.image.id_for_label }}">
     {% if form.instance.image %}
         <div class="my-2">
             <img id="image-preview"
                  src="{{ form.instance.image.url }}"
-                 alt="Image actuelle"
+                 alt="Image actuelle du ticket : {{ form.instance.title|default:'Aperçu' }}"
                  style="max-width: 200px; max-height: 200px; border:1px solid #ccc; border-radius:4px;">
         </div>
     {% else %}
         <img id="image-preview"
              src=""
-             alt="Aperçu"
+             alt="Aperçu de l'image sélectionnée"
              style="display:none; max-width: 200px; max-height: 200px; border:1px solid #ccc; border-radius:4px;">
     {% endif %}
 </div>
-<input type="file" name="image" id="custom-image-input" style="display:none;" accept="image/*">
+<input type="file" 
+       name="image" 
+       id="{{ form.image.id_for_label }}" 
+       style="display:none;" 
+       accept="image/*"
+       aria-describedby="image-help">
 <button type="button"
-    onclick="document.getElementById('custom-image-input').click();"
+    onclick="document.getElementById('{{ form.image.id_for_label }}').click();"
+    aria-describedby="image-help"
+    aria-controls="image-preview"
+    aria-label="Sélectionner un fichier image"
     class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold transition mt-2">
     Télécharger fichier
 </button>
+<p id="image-help" class="text-sm text-gray-600 mt-1">Formats acceptés : JPG, PNG, GIF. Taille maximale recommandée : 2MB</p>
 <script>
-    const input = document.getElementById('custom-image-input');
+    const input = document.getElementById('{{ form.image.id_for_label }}');
     const preview = document.getElementById('image-preview');
     if (input && preview) {
         input.addEventListener('change', function(event) {
