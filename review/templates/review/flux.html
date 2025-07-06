@@ -17,9 +17,11 @@
                         <p class="text-sm text-gray-600 font-semibold">{% if post.user == user %}Vous avez publié une critique{% else %}{{ post.user }} a publié une critique{% endif %}</p>
                         <p class="text-right mb-0">{{ post.created|date:"H:i, d F Y" }}</p>
                     </div>
-                    <h3 class="font-bold text-lg text-blue-900">{{ post.headline }}</h3>
-                    <div class="rating-display mb-2">
-                        {% display_stars post.rating %}
+                    <div class="flex items-baseline mt-2 gap-4">
+                        <h3 class="font-bold text-lg text-blue-900">{{ post.headline }}</h3>
+                        <div class="rating-display">
+                            {% display_stars post.rating %}
+                        </div>
                     </div>
                     <p class="mb-2">{{ post.body }}</p>
                     <div class="border border-gray-300 bg-white rounded p-4 my-4">
