@@ -22,8 +22,7 @@ class TicketForm(forms.ModelForm):
                 attrs={
                     'style': (
                         'border:2px solid #333; '
-                        'width:100%; '
-                        'text-align:center;'
+                        'width:100%;'
                     )
                 }
             ),
