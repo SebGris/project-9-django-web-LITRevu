@@ -87,6 +87,7 @@ Consultez aussi la documentation officielle :
 👉 https://docs.djangoproject.com/fr/5.2/ref/models/querysets/#queryset-api
 👉 https://docs.djangoproject.com/fr/5.2/topics/db/queries/#complex-lookups-with-q-objects
 👉 https://docs.djangoproject.com/fr/5.2/topics/db/aggregation/#generating-aggregates-for-each-item-in-a-queryset
+👉 https://realpython.com/python-pyproject-toml/
 
 ---
 
