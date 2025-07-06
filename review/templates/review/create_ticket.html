@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2 class="text-center my-8">Créer un ticket</h2>
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-center">
+        <p class="text-blue-800 mb-2">
+            <strong>Demandez une critique pour un livre ou un article de littérature</strong>
+        </p>
+        <p class="text-blue-600 text-sm">
+            Rédigez votre demande en précisant le titre de l'œuvre, l'auteur et pourquoi vous souhaitez avoir des avis. Vous pouvez également ajouter une image de couverture.
+        </p>
+    </div>
     <form method="post" enctype="multipart/form-data">
         {% include 'review/_form_ticket.html' with form=form %}
         {% csrf_token %}
