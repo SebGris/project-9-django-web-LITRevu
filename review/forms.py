@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from . import models
 from .models import UserFollows
 from .widgets import StarRatingWidget
-# from .widgets import SimpleStarRatingWidget
+from .widgets import SimpleStarRatingWidget, SimpleRatingWidget
 
 User = get_user_model()
 
@@ -60,7 +60,7 @@ class ReviewForm(forms.ModelForm):
             'body': 'Commentaire',
         }
         widgets = {
-            'rating': StarRatingWidget(),
+            'rating': SimpleRatingWidget(),
             'headline': forms.TextInput(
                 attrs={
                     'style': (

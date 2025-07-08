@@ -112,7 +112,7 @@ class SimpleStarRatingWidget(forms.RadioSelect):
         # Assurer que value est un entier valide
         current_value = int(value) if value and str(value).isdigit() else 0
 
-        html = f'<div class="star-radio-group" id="{group_id}" data-name="{name}">'
+        html = f'<div class="star-radio-group" id="{group_id}">'
 
         for i in range(1, 6):
             checked = 'checked' if current_value == i else ''
@@ -130,8 +130,10 @@ class SimpleStarRatingWidget(forms.RadioSelect):
 
         html += f'''
         <script>
-        (function() {{
+        document.addEventListener('DOMContentLoaded', function() {{
             const group = document.getElementById('{group_id}');
+            if (!group) return;
+            
             const inputs = group.querySelectorAll('input[type="radio"]');
             const stars = group.querySelectorAll('.star-radio');
 
@@ -151,15 +153,44 @@ class SimpleStarRatingWidget(forms.RadioSelect):
             // Initialiser avec la valeur actuelle
             updateStars({current_value});
 
-            inputs.forEach((input, index) => {{
+            inputs.forEach((input) => {{
                 input.addEventListener('change', function() {{
                     if (this.checked) {{
                         updateStars(parseInt(this.value));
                     }}
                 }});
             }});
-        }})();
+        }});
         </script>
         '''
 
+        return mark_safe(html)
+
+
+class SimpleRatingWidget(forms.RadioSelect):
+    """
+    Version simple avec boutons radio horizontaux
+    """
+    def __init__(self, attrs=None):
+        choices = [(i, f'{i}') for i in range(0, 6)]
+        super().__init__(attrs, choices)
+
+    def render(self, name, value, attrs=None, renderer=None):
+        # Rendu HTML simple et fonctionnel en horizontal
+        html = '<div class="simple-rating-widget" style="display: flex; gap: 15px; align-items: center;">'
+        
+        for i in range(0, 6):
+            checked = 'checked' if str(value) == str(i) else ''
+            if i == 0:
+                label_text = "0 étoile"
+            else:
+                label_text = f'{i} étoile{"s" if i > 1 else ""}'
+            
+            html += f'''
+            <label style="display: flex; align-items: center; cursor: pointer; white-space: nowrap;">
+                <input type="radio" name="{name}" value="{i}" {checked} style="margin-right: 5px;">
+                {label_text}
+            </label>
+            '''
+        html += '</div>'
         return mark_safe(html)
