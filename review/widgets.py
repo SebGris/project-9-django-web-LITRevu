@@ -104,47 +104,61 @@ class SimpleStarRatingWidget(forms.RadioSelect):
         if attrs is None:
             attrs = {}
 
-        html = f'<div class="star-radio-group" data-name="{name}">'
+        # Générer un ID unique pour éviter les conflits
+        import uuid
+        unique_id = str(uuid.uuid4())[:8]
+        group_id = f"star_group_{unique_id}"
+
+        # Assurer que value est un entier valide
+        current_value = int(value) if value and str(value).isdigit() else 0
+
+        html = f'<div class="star-radio-group" id="{group_id}" data-name="{name}">'
 
         for i in range(1, 6):
-            checked = 'checked' if str(value) == str(i) else ''
-            filled_class = 'filled' if str(value) == str(i) else 'empty'
+            checked = 'checked' if current_value == i else ''
+            filled_class = 'filled' if current_value >= i else 'empty'
+            input_id = f"{group_id}_star_{i}"
+            
             html += f'''
-            <label class="star-label">
-                <input type="radio" name="{name}" value="{i}" {checked}
-                       style="display: none;">
+            <label class="star-label" for="{input_id}">
+                <input type="radio" id="{input_id}" name="{name}" value="{i}" {checked}>
                 <span class="star-radio {filled_class}">★</span>
             </label>
             '''
 
         html += '</div>'
 
-        html += '''
+        html += f'''
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const radioGroups = document.querySelectorAll('.star-radio-group');
+        (function() {{
+            const group = document.getElementById('{group_id}');
+            const inputs = group.querySelectorAll('input[type="radio"]');
+            const stars = group.querySelectorAll('.star-radio');
 
-            radioGroups.forEach(group => {
-                const labels = group.querySelectorAll('.star-label');
-                const inputs = group.querySelectorAll('input[type="radio"]');
-                const stars = group.querySelectorAll('.star-radio');
+            function updateStars(selectedValue) {{
+                stars.forEach((star, index) => {{
+                    const starValue = index + 1;
+                    if (starValue <= selectedValue) {{
+                        star.classList.remove('empty');
+                        star.classList.add('filled');
+                    }} else {{
+                        star.classList.remove('filled');
+                        star.classList.add('empty');
+                    }}
+                }});
+            }}
 
-                labels.forEach((label, index) => {
-                    label.addEventListener('click', function() {
-                        // Mettre à jour tous les étoiles
-                        stars.forEach((star, i) => {
-                            if (i <= index) {
-                                star.classList.remove('empty');
-                                star.classList.add('filled');
-                            } else {
-                                star.classList.remove('filled');
-                                star.classList.add('empty');
-                            }
-                        });
-                    });
-                });
-            });
-        });
+            // Initialiser avec la valeur actuelle
+            updateStars({current_value});
+
+            inputs.forEach((input, index) => {{
+                input.addEventListener('change', function() {{
+                    if (this.checked) {{
+                        updateStars(parseInt(this.value));
+                    }}
+                }});
+            }});
+        }})();
         </script>
         '''
 
