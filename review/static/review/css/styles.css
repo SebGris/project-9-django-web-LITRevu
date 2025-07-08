@@ -73,37 +73,6 @@ h3 {
     color: #ffed4e;
 }
 
-/* Styles pour les radio buttons en étoiles */
-.star-radio-group {
-    display: inline-flex;
-    gap: 2px;
-}
-
-.star-label {
-    cursor: pointer;
-    display: inline-block;
-}
-
-.star-label input[type="radio"] {
-    display: none;
-}
-
-.star-radio {
-    font-size: 1.5em;
-    transition: all 0.2s ease;
-    color: #ddd;
-}
-
-.star-radio.filled {
-    color: #ffd700;
-    text-shadow: 0 0 2px rgba(255, 215, 0, 0.5);
-}
-
-.star-radio:hover {
-    transform: scale(1.1);
-    color: #ffed4e !important;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
     .star {
