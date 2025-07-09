@@ -49,21 +49,21 @@ class Review(models.Model):
     def __str__(self):
         return f"{self.headline} - {self.rating}/5 - {self.user.username}"
 
-    def get_stars_display(self):
-        """Retourne l'affichage en étoiles du rating"""
-        full_stars = "★" * self.rating
-        empty_stars = "☆" * (5 - self.rating)
-        return full_stars + empty_stars
+    # def get_stars_display(self):
+    #     """Retourne l'affichage en étoiles du rating"""
+    #     full_stars = "★" * self.rating
+    #     empty_stars = "☆" * (5 - self.rating)
+    #     return full_stars + empty_stars
 
-    def get_stars_html(self):
-        """Retourne l'HTML pour afficher les étoiles"""
-        stars_html = ""
-        for i in range(1, 6):
-            if i <= self.rating:
-                stars_html += '<span class="star filled">★</span>'
-            else:
-                stars_html += '<span class="star empty">☆</span>'
-        return stars_html
+    # def get_stars_html(self):
+    #     """Retourne l'HTML pour afficher les étoiles"""
+    #     stars_html = ""
+    #     for i in range(1, 6):
+    #         if i <= self.rating:
+    #             stars_html += '<span class="star filled">★</span>'
+    #         else:
+    #             stars_html += '<span class="star empty">☆</span>'
+    #     return stars_html
 
 
 class UserFollows(models.Model):
