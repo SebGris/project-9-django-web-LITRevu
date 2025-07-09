@@ -11,7 +11,12 @@ class SignupForm(UserCreationForm):
             'username': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': "Nom d'utilisateur",
-                'style': 'border:2px solid #333; border-radius:4px; padding:8px; width:100%;'
+                'style': (
+                    'border:2px solid #333; '
+                    'border-radius:4px; '
+                    'padding:8px; '
+                    'width:100%;'
+                )
             }),
         }
 
@@ -23,12 +28,22 @@ class SignupForm(UserCreationForm):
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Mot de passe',
-            'style': 'border:2px solid #333; border-radius:4px; padding:8px; width:100%;'
+            'style': (
+                'border:2px solid #333; '
+                'border-radius:4px; '
+                'padding:8px; '
+                'width:100%;'
+            )
         })
         self.fields['password2'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Confirmation du mot de passe',
-            'style': 'border:2px solid #333; border-radius:4px; padding:8px; width:100%;'
+            'style': (
+                'border:2px solid #333; '
+                'border-radius:4px; '
+                'padding:8px; '
+                'width:100%;'
+            )
         })
 
 
@@ -39,13 +54,21 @@ class CustomLoginForm(AuthenticationForm):
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Nom d’utilisateur',
-            'style': 'border: 2px solid #007bff; border-radius: 4px; padding: 8px;'
+            'style': (
+                'border: 2px solid #007bff; '
+                'border-radius: 4px; '
+                'padding: 8px;'
+            )
         })
     )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': 'Mot de passe',
-            'style': 'border: 2px solid #007bff; border-radius: 4px; padding: 8px;'
+            'style': (
+                'border: 2px solid #007bff; '
+                'border-radius: 4px; '
+                'padding: 8px;'
+            )
         })
     )

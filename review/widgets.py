@@ -102,20 +102,25 @@ class SimpleRatingWidget(forms.RadioSelect):
 
     def render(self, name, value, attrs=None, renderer=None):
         # Rendu HTML simple et fonctionnel en horizontal
-        html = '<div class="simple-rating-widget" style="display: flex; gap: 15px; align-items: center;">'
-        
+        html = (
+            '<div class="simple-rating-widget" '
+            'style="display: flex; gap: 15px; align-items: center;">'
+        )
+
         for i in range(0, 6):
             checked = 'checked' if str(value) == str(i) else ''
             if i == 0:
                 label_text = "0 étoile"
             else:
                 label_text = f'{i} étoile{"s" if i > 1 else ""}'
-            
-            html += f'''
-            <label style="display: flex; align-items: center; cursor: pointer; white-space: nowrap;">
-                <input type="radio" name="{name}" value="{i}" {checked} style="margin-right: 5px;">
-                {label_text}
-            </label>
-            '''
+
+            html += (
+                f'<label style="display: flex; align-items: center; '
+                f'cursor: pointer; white-space: nowrap;">'
+                f'<input type="radio" name="{name}" value="{i}" {checked} '
+                f'style="margin-right: 5px;">'
+                f'{label_text}'
+                f'</label>'
+            )
         html += '</div>'
         return mark_safe(html)

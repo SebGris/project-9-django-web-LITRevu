@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 from . import models
 from .models import UserFollows
+
 # from .widgets import StarRatingWidget
 from .widgets import SimpleRatingWidget
 
